@@ -1,0 +1,283 @@
+---
+// 404 Error Page for NosytLabs
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Page Not Found - NosytLabs"
+  description="The page you're looking for doesn't exist. Explore our portfolio, projects, and services instead."
+>
+  <!-- 404 Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-secondary text-white py-20 overflow-hidden min-h-screen flex items-center">
+    <!-- Background particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particles-enhanced"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <!-- 404 Animation -->
+        <div class="mb-8 animate-bounce">
+          <div class="text-8xl md:text-9xl font-bold text-accent mb-4 glitch-text" data-text="404">
+            404
+          </div>
+          <div class="w-32 h-1 bg-accent mx-auto animate-pulse"></div>
+        </div>
+
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+          Page Not Found
+        </h1>
+        
+        <p class="text-xl mb-8 animate-fade-in max-w-2xl mx-auto" style="animation-delay: 0.2s;">
+          Oops! The page you're looking for seems to have wandered off into the digital void. 
+          But don't worry, there's plenty more to explore at NosytLabs.
+        </p>
+
+        <!-- Error Messages with Humor -->
+        <div class="bg-black/20 backdrop-blur-sm rounded-lg p-6 mb-8 animate-fade-in" style="animation-delay: 0.4s;">
+          <div class="text-left max-w-md mx-auto font-mono text-sm">
+            <div class="text-red-300 mb-2">ERROR 404: Page not found</div>
+            <div class="text-yellow-300 mb-2">SUGGESTION: Try a different path</div>
+            <div class="text-green-300">STATUS: Ready to help you find what you need</div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 animate-fade-in" style="animation-delay: 0.6s;">
+          <a href="/" class="btn btn-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+            </svg>
+            Go Home
+          </a>
+          <a href="/projects" class="btn btn-outline-light">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+            View Projects
+          </a>
+          <a href="/contact" class="btn btn-outline-light">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+            Contact Us
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Helpful Links Section -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          Popular Pages
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300">
+          Here are some popular destinations that might interest you
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- About -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:transform hover:scale-105 transition-all duration-300">
+          <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">About NosytLabs</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">Learn about our story, mission, and the journey behind Notable Opportunities Shape Your Tomorrow.</p>
+          <a href="/about" class="text-accent hover:text-accent-dark font-medium">
+            Learn More →
+          </a>
+        </div>
+
+        <!-- Services -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:transform hover:scale-105 transition-all duration-300">
+          <div class="w-12 h-12 bg-secondary/20 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">Our Services</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">Explore our web development, content creation, and consultation services.</p>
+          <a href="/services" class="text-accent hover:text-accent-dark font-medium">
+            View Services →
+          </a>
+        </div>
+
+        <!-- NosytOS95 -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:transform hover:scale-105 transition-all duration-300">
+          <div class="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mb-4">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-2">NosytOS95</h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-4">Experience our unique Windows 95-inspired interface with working applications and games.</p>
+          <a href="/nosytos95" class="text-accent hover:text-accent-dark font-medium">
+            Try NosytOS95 →
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Search Section -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          Still Can't Find What You're Looking For?
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-8">
+          Try searching our site or get in touch with us directly
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <div class="relative flex-1 max-w-md">
+            <input 
+              type="text" 
+              placeholder="Search our site..." 
+              class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+              id="search-input"
+            >
+            <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-accent">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </button>
+          </div>
+          <a href="/contact" class="btn btn-primary whitespace-nowrap">
+            Contact Support
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .particles-enhanced {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: particlesEnhanced 30s linear infinite;
+  }
+
+  @keyframes particlesEnhanced {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+    25% { transform: translateY(-15px) translateX(15px) scale(1.05); opacity: 0.9; }
+    50% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+    75% { transform: translateY(15px) translateX(-15px) scale(0.95); opacity: 0.9; }
+    100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+  }
+
+  .glitch-text {
+    position: relative;
+    animation: glitch 2s infinite;
+  }
+
+  .glitch-text::before,
+  .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch-text::before {
+    animation: glitch-1 0.5s infinite;
+    color: #ff0000;
+    z-index: -1;
+  }
+
+  .glitch-text::after {
+    animation: glitch-2 0.5s infinite;
+    color: #00ff00;
+    z-index: -2;
+  }
+
+  @keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-2px, 2px); }
+    40% { transform: translate(-2px, -2px); }
+    60% { transform: translate(2px, 2px); }
+    80% { transform: translate(2px, -2px); }
+  }
+
+  @keyframes glitch-1 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(-1px, 1px); }
+    40% { transform: translate(-1px, -1px); }
+    60% { transform: translate(1px, 1px); }
+    80% { transform: translate(1px, -1px); }
+  }
+
+  @keyframes glitch-2 {
+    0%, 100% { transform: translate(0); }
+    20% { transform: translate(1px, -1px); }
+    40% { transform: translate(1px, 1px); }
+    60% { transform: translate(-1px, -1px); }
+    80% { transform: translate(-1px, 1px); }
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-outline-light {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary);
+  }
+</style>
+
+<script>
+  // Simple search functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const query = searchInput.value.trim();
+          if (query) {
+            // Redirect to a search results page or Google site search
+            window.location.href = `https://www.google.com/search?q=site:nosytlabs.com ${encodeURIComponent(query)}`;
+          }
+        }
+      });
+    }
+  });
+</script>

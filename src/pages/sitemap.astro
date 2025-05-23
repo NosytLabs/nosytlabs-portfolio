@@ -1,0 +1,308 @@
+---
+// Sitemap page for NosytLabs
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Define site structure
+const siteStructure = {
+  "Main Pages": [
+    { name: "Home", url: "/", description: "Welcome to NosytLabs - Notable Opportunities Shape Your Tomorrow" },
+    { name: "About", url: "/about", description: "Learn about our story, mission, and the journey behind NosytLabs" },
+    { name: "Projects", url: "/projects", description: "Explore our portfolio of web development and creative projects" },
+    { name: "Services", url: "/services", description: "Web development, consultation, and content creation services" },
+    { name: "Resume", url: "/resume", description: "Professional experience, skills, and qualifications" },
+    { name: "Contact", url: "/contact", description: "Get in touch for projects, collaborations, or inquiries" }
+  ],
+  "Interactive Features": [
+    { name: "NosytOS95", url: "/nosytos95", description: "Windows 95-inspired interface with working applications and games" }
+  ],
+  "Content & Resources": [
+    { name: "Blog", url: "/blog", description: "Articles about web development, AI tools, and technology" },
+    { name: "3D Printing", url: "/3d-printing", description: "3D printing services, guides, and resources" },
+    { name: "Content Creation", url: "/content-creation", description: "YouTube channel, streaming, and educational content" },
+    { name: "Passive Income", url: "/passive-income", description: "Resources and guides for passive income opportunities" },
+    { name: "Crypto Mining", url: "/crypto-mining", description: "Cryptocurrency mining information and resources" },
+    { name: "Live Streaming", url: "/live", description: "Live streaming schedule and content on Kick.com" }
+  ],
+  "Blog Posts": [
+    { name: "AI Tools Comparison 2025", url: "/blog/ai-tools-comparison-2025", description: "Comprehensive comparison of AI development tools" },
+    { name: "Cursor AI Review", url: "/blog/cursor-ai-review", description: "In-depth review of Cursor AI coding assistant" },
+    { name: "Future of 3D Printing 2025", url: "/blog/future-of-3d-printing-2025", description: "Trends and predictions for 3D printing technology" },
+    { name: "Roo Code vs Windsurf", url: "/blog/roo-code-windsurf-comparison", description: "Comparison of AI coding assistants for large codebases" },
+    { name: "Trae AI Guide", url: "/blog/trae-ai-guide", description: "Complete guide to using Trae AI for adaptive coding" }
+  ],
+  "Passive Income Resources": [
+    { name: "Passive Income Guide", url: "/passive-income/guide", description: "Complete guide to passive income opportunities" },
+    { name: "App Comparison", url: "/passive-income/comparison", description: "Compare different passive income applications" },
+    { name: "Brave Browser", url: "/passive-income/brave", description: "Earn BAT tokens with Brave browser" },
+    { name: "EarnApp", url: "/passive-income/earnapp", description: "Earn money by sharing internet bandwidth" },
+    { name: "Honeygain", url: "/passive-income/honeygain", description: "Passive income through network sharing" },
+    { name: "Peer2Profit", url: "/passive-income/peer2profit", description: "Monetize your internet connection" },
+    { name: "Repocket", url: "/passive-income/repocket", description: "Earn passive income with Repocket" },
+    { name: "Swagbucks", url: "/passive-income/swagbucks", description: "Earn rewards through various activities" },
+    { name: "TraffMonetizer", url: "/passive-income/traffmonetizer", description: "Monetize your internet traffic" }
+  ],
+  "Legal & Information": [
+    { name: "Privacy Policy", url: "/privacy-policy", description: "How we collect, use, and protect your personal information" },
+    { name: "Terms of Service", url: "/terms-of-service", description: "Legal terms and conditions for using our services" },
+    { name: "Sitemap", url: "/sitemap", description: "Complete overview of all pages and content on our website" }
+  ]
+};
+---
+
+<BaseLayout
+  title="Sitemap - NosytLabs"
+  description="Complete sitemap of NosytLabs website. Find all pages, blog posts, resources, and content organized by category."
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-secondary text-white py-20">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6">
+          Site Map
+        </h1>
+        <p class="text-xl mb-4">
+          Complete overview of all content and pages
+        </p>
+        <p class="text-sm opacity-80">
+          Navigate our entire website structure
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sitemap Content -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        
+        <!-- Quick Navigation -->
+        <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-6 mb-12">
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Quick Navigation</h2>
+          <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {Object.keys(siteStructure).map((category) => (
+              <a 
+                href={`#${category.toLowerCase().replace(/\s+/g, '-')}`}
+                class="text-accent hover:text-accent-dark font-medium text-sm p-2 rounded bg-white dark:bg-gray-800 shadow hover:shadow-md transition-all duration-200"
+              >
+                {category}
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <!-- Site Structure -->
+        <div class="space-y-12">
+          {Object.entries(siteStructure).map(([category, pages]) => (
+            <div id={category.toLowerCase().replace(/\s+/g, '-')} class="scroll-mt-20">
+              <div class="flex items-center mb-6">
+                <div class="w-8 h-8 bg-accent rounded-full flex items-center justify-center mr-4">
+                  <span class="text-white font-bold text-sm">{pages.length}</span>
+                </div>
+                <h2 class="text-3xl font-bold text-gray-800 dark:text-white">{category}</h2>
+              </div>
+              
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {pages.map((page) => (
+                  <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg border border-gray-100 dark:border-gray-700 hover:shadow-xl transition-all duration-300 hover:transform hover:scale-105">
+                    <div class="flex items-start justify-between mb-3">
+                      <h3 class="text-lg font-semibold text-gray-800 dark:text-white">
+                        <a href={page.url} class="hover:text-accent transition-colors duration-200">
+                          {page.name}
+                        </a>
+                      </h3>
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 hover:text-accent transition-colors duration-200" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                      </svg>
+                    </div>
+                    
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 leading-relaxed">
+                      {page.description}
+                    </p>
+                    
+                    <div class="flex items-center justify-between">
+                      <code class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded text-gray-600 dark:text-gray-300">
+                        {page.url}
+                      </code>
+                      <a 
+                        href={page.url} 
+                        class="text-accent hover:text-accent-dark text-sm font-medium transition-colors duration-200"
+                      >
+                        Visit →
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Statistics -->
+        <div class="mt-16 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-8 border border-primary/20">
+          <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+            Website Statistics
+          </h2>
+          <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="text-center">
+              <div class="text-3xl font-bold text-accent mb-2">
+                {Object.values(siteStructure).flat().length}
+              </div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Total Pages</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-accent mb-2">
+                {Object.keys(siteStructure).length}
+              </div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Categories</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-accent mb-2">
+                {siteStructure["Blog Posts"]?.length || 0}
+              </div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Blog Posts</div>
+            </div>
+            <div class="text-center">
+              <div class="text-3xl font-bold text-accent mb-2">
+                {siteStructure["Passive Income Resources"]?.length || 0}
+              </div>
+              <div class="text-gray-600 dark:text-gray-300 text-sm">Resources</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Search and Contact -->
+        <div class="mt-16 grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Search -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
+              Can't Find What You're Looking For?
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Use our search functionality or browse by category
+            </p>
+            <div class="relative">
+              <input 
+                type="text" 
+                placeholder="Search our site..." 
+                class="w-full px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                id="sitemap-search"
+              >
+              <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-accent">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <!-- Contact -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-white mb-4">
+              Need Help or Have Questions?
+            </h3>
+            <p class="text-gray-600 dark:text-gray-300 mb-4">
+              Get in touch with us for support or inquiries
+            </p>
+            <div class="space-y-2">
+              <a href="/contact" class="block text-accent hover:text-accent-dark font-medium">
+                📧 Contact Form
+              </a>
+              <a href="mailto:info@nosytlabs.com" class="block text-accent hover:text-accent-dark font-medium">
+                ✉️ info@nosytlabs.com
+              </a>
+              <a href="https://github.com/NosytLabs" target="_blank" rel="noopener noreferrer" class="block text-accent hover:text-accent-dark font-medium">
+                🐙 GitHub Profile
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Smooth scrolling for anchor links */
+  html {
+    scroll-behavior: smooth;
+  }
+
+  /* Hover effects for page cards */
+  .hover\:transform:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Custom scrollbar for better UX */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--nosyt-orange-main);
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--nosyt-orange-dark);
+  }
+
+  /* Dark mode scrollbar */
+  .dark ::-webkit-scrollbar-track {
+    background: #374151;
+  }
+</style>
+
+<script>
+  // Search functionality
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchInput = document.getElementById('sitemap-search');
+    if (searchInput) {
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          const query = searchInput.value.trim();
+          if (query) {
+            // Redirect to Google site search
+            window.location.href = `https://www.google.com/search?q=site:nosytlabs.com ${encodeURIComponent(query)}`;
+          }
+        }
+      });
+    }
+
+    // Highlight current section in navigation
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -80% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Remove active class from all nav links
+          document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.classList.remove('bg-accent', 'text-white');
+            link.classList.add('bg-white', 'dark:bg-gray-800');
+          });
+          
+          // Add active class to current section link
+          const id = entry.target.id;
+          const navLink = document.querySelector(`a[href="#${id}"]`);
+          if (navLink) {
+            navLink.classList.remove('bg-white', 'dark:bg-gray-800');
+            navLink.classList.add('bg-accent', 'text-white');
+          }
+        }
+      });
+    }, observerOptions);
+
+    // Observe all sections
+    document.querySelectorAll('[id]').forEach((section) => {
+      observer.observe(section);
+    });
+  });
+</script>

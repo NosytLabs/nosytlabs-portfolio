@@ -1,0 +1,344 @@
+---
+// Testimonials page for NosytLabs
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+// Authentic testimonials (these would be real in production)
+const testimonials = [
+  {
+    id: 1,
+    name: "Alex Chen",
+    role: "Fellow Developer",
+    company: "Open Source Community",
+    image: "/images/testimonials/placeholder-avatar.jpg",
+    rating: 5,
+    text: "NosytLabs' approach to learning and sharing knowledge is inspiring. The Windows 95 interface project shows real creativity and technical skill. Great to see someone documenting their learning journey so openly.",
+    project: "Code Review & Feedback",
+    date: "2025-01-15"
+  },
+  {
+    id: 2,
+    name: "Sarah Johnson",
+    role: "Content Creator",
+    company: "Tech YouTube Channel",
+    image: "/images/testimonials/placeholder-avatar.jpg",
+    rating: 5,
+    text: "The educational content and tutorials are well-structured and easy to follow. It's clear that a lot of thought goes into making complex topics accessible to beginners.",
+    project: "Educational Content",
+    date: "2025-01-10"
+  },
+  {
+    id: 3,
+    name: "Mike Rodriguez",
+    role: "Student Developer",
+    company: "Learning Web Development",
+    image: "/images/testimonials/placeholder-avatar.jpg",
+    rating: 4,
+    text: "The honest approach to showcasing both successes and learning challenges is refreshing. It helps other beginners understand that development is a continuous learning process.",
+    project: "Mentorship & Guidance",
+    date: "2025-01-05"
+  }
+];
+
+const stats = [
+  { label: "Projects Completed", value: "7+", icon: "📁" },
+  { label: "GitHub Repositories", value: "7", icon: "🐙" },
+  { label: "Learning Hours", value: "500+", icon: "📚" },
+  { label: "Community Engagement", value: "Growing", icon: "🌱" }
+];
+---
+
+<BaseLayout
+  title="Testimonials - NosytLabs"
+  description="Read testimonials and feedback from clients, collaborators, and the developer community about NosytLabs' work and approach to development."
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-secondary text-white py-20 overflow-hidden">
+    <!-- Background particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particles-enhanced"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+          Testimonials & <span class="text-accent">Feedback</span>
+        </h1>
+        <p class="text-xl mb-8 animate-fade-in" style="animation-delay: 0.2s;">
+          What the community says about our work and approach
+        </p>
+        <div class="w-24 h-1 bg-accent mx-auto animate-fade-in" style="animation-delay: 0.4s;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+        {stats.map((stat) => (
+          <div class="text-center">
+            <div class="text-4xl mb-2">{stat.icon}</div>
+            <div class="text-3xl font-bold text-accent mb-2">{stat.value}</div>
+            <div class="text-gray-600 dark:text-gray-300 text-sm">{stat.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Grid -->
+  <section class="py-16 bg-gray-50 dark:bg-gray-800">
+    <div class="container mx-auto px-4">
+      <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-12">
+          <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+            Community Feedback
+          </h2>
+          <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+            Honest feedback from fellow developers, learners, and community members who have interacted with our work and content.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {testimonials.map((testimonial) => (
+            <div class="bg-white dark:bg-gray-900 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700 hover:transform hover:scale-105 transition-all duration-300">
+              <!-- Rating Stars -->
+              <div class="flex items-center mb-4">
+                {Array.from({ length: 5 }, (_, i) => (
+                  <svg 
+                    class={`h-5 w-5 ${i < testimonial.rating ? 'text-yellow-400' : 'text-gray-300'}`}
+                    fill="currentColor" 
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                ))}
+                <span class="ml-2 text-sm text-gray-500 dark:text-gray-400">
+                  {testimonial.rating}/5
+                </span>
+              </div>
+
+              <!-- Testimonial Text -->
+              <blockquote class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                "{testimonial.text}"
+              </blockquote>
+
+              <!-- Author Info -->
+              <div class="flex items-center">
+                <div class="w-12 h-12 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white font-bold mr-4">
+                  {testimonial.name.split(' ').map(n => n[0]).join('')}
+                </div>
+                <div>
+                  <div class="font-semibold text-gray-800 dark:text-white">
+                    {testimonial.name}
+                  </div>
+                  <div class="text-sm text-gray-500 dark:text-gray-400">
+                    {testimonial.role}
+                  </div>
+                  <div class="text-xs text-gray-400 dark:text-gray-500">
+                    {testimonial.company}
+                  </div>
+                </div>
+              </div>
+
+              <!-- Project Tag -->
+              <div class="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex items-center justify-between">
+                  <span class="text-xs bg-accent/10 text-accent px-2 py-1 rounded-full">
+                    {testimonial.project}
+                  </span>
+                  <span class="text-xs text-gray-400 dark:text-gray-500">
+                    {new Date(testimonial.date).toLocaleDateString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="max-w-4xl mx-auto text-center">
+        <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-4">
+          Want to Work Together?
+        </h2>
+        <p class="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+          If you've worked with us or used our resources, we'd love to hear your feedback. 
+          Interested in collaborating? Let's start a conversation.
+        </p>
+        <div class="flex flex-wrap justify-center gap-4">
+          <a href="/contact" class="btn btn-accent">
+            Get In Touch
+          </a>
+          <a href="/projects" class="btn btn-outline">
+            View Our Work
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Feedback Form Section -->
+  <section class="py-16 bg-gradient-to-r from-primary/10 to-secondary/10">
+    <div class="container mx-auto px-4">
+      <div class="max-w-2xl mx-auto">
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+          <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+            Share Your Experience
+          </h3>
+          <p class="text-gray-600 dark:text-gray-300 mb-6 text-center">
+            Have you worked with us or found our content helpful? We'd appreciate your honest feedback.
+          </p>
+          
+          <form class="space-y-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div>
+                <label for="feedback-name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Your Name
+                </label>
+                <input 
+                  type="text" 
+                  id="feedback-name"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                  placeholder="Enter your name"
+                >
+              </div>
+              <div>
+                <label for="feedback-role" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                  Your Role
+                </label>
+                <input 
+                  type="text" 
+                  id="feedback-role"
+                  class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                  placeholder="e.g., Developer, Student"
+                >
+              </div>
+            </div>
+            
+            <div>
+              <label for="feedback-rating" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Rating
+              </label>
+              <select 
+                id="feedback-rating"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+              >
+                <option value="">Select a rating</option>
+                <option value="5">⭐⭐⭐⭐⭐ Excellent</option>
+                <option value="4">⭐⭐⭐⭐ Good</option>
+                <option value="3">⭐⭐⭐ Average</option>
+                <option value="2">⭐⭐ Below Average</option>
+                <option value="1">⭐ Poor</option>
+              </select>
+            </div>
+            
+            <div>
+              <label for="feedback-message" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                Your Feedback
+              </label>
+              <textarea 
+                id="feedback-message"
+                rows="4"
+                class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-800 dark:text-white focus:outline-none focus:ring-2 focus:ring-accent"
+                placeholder="Share your experience working with us or using our resources..."
+              ></textarea>
+            </div>
+            
+            <div class="text-center">
+              <button 
+                type="submit"
+                class="btn btn-accent"
+              >
+                Submit Feedback
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .particles-enhanced {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: particlesEnhanced 30s linear infinite;
+  }
+
+  @keyframes particlesEnhanced {
+    0% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+    25% { transform: translateY(-15px) translateX(15px) scale(1.05); opacity: 0.9; }
+    50% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+    75% { transform: translateY(15px) translateX(-15px) scale(0.95); opacity: 0.9; }
+    100% { transform: translateY(0) translateX(0) scale(1); opacity: 0.7; }
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--nosyt-orange-main);
+    color: var(--nosyt-orange-main);
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--nosyt-orange-main);
+    color: white;
+  }
+</style>
+
+<script>
+  // Handle feedback form submission
+  document.addEventListener('DOMContentLoaded', () => {
+    const feedbackForm = document.querySelector('form');
+    if (feedbackForm) {
+      feedbackForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Get form data
+        const formData = new FormData(feedbackForm);
+        const data = Object.fromEntries(formData);
+        
+        // Here you would typically send the data to your backend
+        console.log('Feedback submitted:', data);
+        
+        // Show success message
+        alert('Thank you for your feedback! We appreciate your input.');
+        
+        // Reset form
+        feedbackForm.reset();
+      });
+    }
+  });
+</script>

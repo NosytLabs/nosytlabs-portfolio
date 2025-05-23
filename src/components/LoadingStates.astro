@@ -1,0 +1,353 @@
+---
+// Loading States Component for NosytLabs
+// Provides various loading indicators and skeleton screens
+
+export interface Props {
+  type?: 'spinner' | 'skeleton' | 'pulse' | 'dots' | 'progress';
+  size?: 'sm' | 'md' | 'lg';
+  text?: string;
+  className?: string;
+}
+
+const {
+  type = 'spinner',
+  size = 'md',
+  text,
+  className = ''
+} = Astro.props;
+
+const sizeClasses = {
+  sm: 'w-4 h-4',
+  md: 'w-8 h-8',
+  lg: 'w-12 h-12'
+};
+---
+
+<!-- Spinner Loading -->
+{type === 'spinner' && (
+  <div class={`loading-spinner ${className}`}>
+    <div class={`animate-spin rounded-full border-2 border-gray-300 border-t-accent ${sizeClasses[size]}`}></div>
+    {text && <p class="mt-2 text-gray-600 dark:text-gray-300 text-sm">{text}</p>}
+  </div>
+)}
+
+<!-- Skeleton Loading -->
+{type === 'skeleton' && (
+  <div class={`loading-skeleton ${className}`}>
+    <div class="animate-pulse space-y-4">
+      <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4"></div>
+      <div class="space-y-2">
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded"></div>
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-5/6"></div>
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-4/6"></div>
+      </div>
+    </div>
+  </div>
+)}
+
+<!-- Pulse Loading -->
+{type === 'pulse' && (
+  <div class={`loading-pulse ${className}`}>
+    <div class={`animate-pulse bg-accent rounded-full ${sizeClasses[size]}`}></div>
+    {text && <p class="mt-2 text-gray-600 dark:text-gray-300 text-sm">{text}</p>}
+  </div>
+)}
+
+<!-- Dots Loading -->
+{type === 'dots' && (
+  <div class={`loading-dots ${className}`}>
+    <div class="flex space-x-1">
+      <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 0ms"></div>
+      <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+      <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+    </div>
+    {text && <p class="mt-2 text-gray-600 dark:text-gray-300 text-sm">{text}</p>}
+  </div>
+)}
+
+<!-- Progress Loading -->
+{type === 'progress' && (
+  <div class={`loading-progress ${className}`}>
+    <div class="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+      <div class="bg-accent h-2 rounded-full animate-progress"></div>
+    </div>
+    {text && <p class="mt-2 text-gray-600 dark:text-gray-300 text-sm">{text}</p>}
+  </div>
+)}
+
+<!-- Card Skeleton -->
+<div class="card-skeleton hidden">
+  <div class="animate-pulse">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+      <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-4"></div>
+      <div class="space-y-2 mb-4">
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded"></div>
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-5/6"></div>
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-4/6"></div>
+      </div>
+      <div class="flex space-x-2">
+        <div class="h-6 bg-gray-300 dark:bg-gray-600 rounded w-16"></div>
+        <div class="h-6 bg-gray-300 dark:bg-gray-600 rounded w-20"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Project Card Skeleton -->
+<div class="project-skeleton hidden">
+  <div class="animate-pulse">
+    <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg">
+      <div class="h-48 bg-gray-300 dark:bg-gray-600"></div>
+      <div class="p-6">
+        <div class="h-6 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-4"></div>
+        <div class="space-y-2 mb-4">
+          <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded"></div>
+          <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-5/6"></div>
+        </div>
+        <div class="flex space-x-2">
+          <div class="h-6 bg-gray-300 dark:bg-gray-600 rounded w-16"></div>
+          <div class="h-6 bg-gray-300 dark:bg-gray-600 rounded w-20"></div>
+          <div class="h-6 bg-gray-300 dark:bg-gray-600 rounded w-18"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Blog Post Skeleton -->
+<div class="blog-skeleton hidden">
+  <div class="animate-pulse">
+    <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow-lg">
+      <div class="flex items-center mb-4">
+        <div class="w-10 h-10 bg-gray-300 dark:bg-gray-600 rounded-full mr-3"></div>
+        <div>
+          <div class="h-4 bg-gray-300 dark:bg-gray-600 rounded w-24 mb-1"></div>
+          <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-16"></div>
+        </div>
+      </div>
+      <div class="h-6 bg-gray-300 dark:bg-gray-600 rounded w-3/4 mb-4"></div>
+      <div class="space-y-2 mb-4">
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded"></div>
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-5/6"></div>
+        <div class="h-3 bg-gray-300 dark:bg-gray-600 rounded w-4/6"></div>
+      </div>
+      <div class="flex space-x-4">
+        <div class="h-8 bg-gray-300 dark:bg-gray-600 rounded w-20"></div>
+        <div class="h-8 bg-gray-300 dark:bg-gray-600 rounded w-16"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .loading-spinner,
+  .loading-pulse,
+  .loading-dots,
+  .loading-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  @keyframes progress {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+  }
+
+  .animate-progress {
+    animation: progress 2s ease-in-out infinite;
+  }
+
+  /* Skeleton shimmer effect */
+  @keyframes shimmer {
+    0% {
+      background-position: -200px 0;
+    }
+    100% {
+      background-position: calc(200px + 100%) 0;
+    }
+  }
+
+  .loading-skeleton .animate-pulse > div,
+  .card-skeleton .animate-pulse > div > div,
+  .project-skeleton .animate-pulse > div > div,
+  .blog-skeleton .animate-pulse > div > div {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200px 100%;
+    animation: shimmer 1.5s infinite;
+  }
+
+  .dark .loading-skeleton .animate-pulse > div,
+  .dark .card-skeleton .animate-pulse > div > div,
+  .dark .project-skeleton .animate-pulse > div > div,
+  .dark .blog-skeleton .animate-pulse > div > div {
+    background: linear-gradient(90deg, #374151 25%, #4b5563 50%, #374151 75%);
+    background-size: 200px 100%;
+  }
+
+  /* Accessibility: Respect reduced motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    .animate-spin,
+    .animate-pulse,
+    .animate-bounce,
+    .animate-progress {
+      animation: none;
+    }
+    
+    .loading-skeleton .animate-pulse > div,
+    .card-skeleton .animate-pulse > div > div,
+    .project-skeleton .animate-pulse > div > div,
+    .blog-skeleton .animate-pulse > div > div {
+      animation: none;
+      background: #e5e7eb;
+    }
+    
+    .dark .loading-skeleton .animate-pulse > div,
+    .dark .card-skeleton .animate-pulse > div > div,
+    .dark .project-skeleton .animate-pulse > div > div,
+    .dark .blog-skeleton .animate-pulse > div > div {
+      background: #4b5563;
+    }
+  }
+
+  /* Loading overlay */
+  .loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+  }
+
+  .dark .loading-overlay {
+    background: rgba(0, 0, 0, 0.9);
+  }
+
+  /* Button loading state */
+  .btn-loading {
+    position: relative;
+    color: transparent;
+    pointer-events: none;
+  }
+
+  .btn-loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  @keyframes spin {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+</style>
+
+<script>
+  // Loading state utilities
+  class LoadingManager {
+    static show(element, type = 'spinner') {
+      if (!element) return;
+      
+      element.classList.add('loading');
+      
+      // Add loading indicator based on type
+      const loadingEl = document.createElement('div');
+      loadingEl.className = `loading-indicator loading-${type}`;
+      
+      if (type === 'spinner') {
+        loadingEl.innerHTML = '<div class="animate-spin rounded-full border-2 border-gray-300 border-t-accent w-6 h-6"></div>';
+      } else if (type === 'dots') {
+        loadingEl.innerHTML = `
+          <div class="flex space-x-1">
+            <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 0ms"></div>
+            <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 150ms"></div>
+            <div class="w-2 h-2 bg-accent rounded-full animate-bounce" style="animation-delay: 300ms"></div>
+          </div>
+        `;
+      }
+      
+      element.appendChild(loadingEl);
+    }
+    
+    static hide(element) {
+      if (!element) return;
+      
+      element.classList.remove('loading');
+      const loadingEl = element.querySelector('.loading-indicator');
+      if (loadingEl) {
+        loadingEl.remove();
+      }
+    }
+    
+    static showOverlay(text = 'Loading...') {
+      const overlay = document.createElement('div');
+      overlay.className = 'loading-overlay';
+      overlay.innerHTML = `
+        <div class="text-center">
+          <div class="animate-spin rounded-full border-4 border-gray-300 border-t-accent w-12 h-12 mx-auto mb-4"></div>
+          <p class="text-gray-600 dark:text-gray-300">${text}</p>
+        </div>
+      `;
+      overlay.id = 'loading-overlay';
+      document.body.appendChild(overlay);
+    }
+    
+    static hideOverlay() {
+      const overlay = document.getElementById('loading-overlay');
+      if (overlay) {
+        overlay.remove();
+      }
+    }
+    
+    static showSkeleton(container, type = 'card') {
+      if (!container) return;
+      
+      const skeleton = document.querySelector(`.${type}-skeleton`);
+      if (skeleton) {
+        const clone = skeleton.cloneNode(true);
+        clone.classList.remove('hidden');
+        container.appendChild(clone);
+      }
+    }
+    
+    static hideSkeleton(container) {
+      if (!container) return;
+      
+      const skeletons = container.querySelectorAll('[class*="-skeleton"]');
+      skeletons.forEach(skeleton => skeleton.remove());
+    }
+  }
+  
+  // Make LoadingManager globally available
+  window.LoadingManager = LoadingManager;
+  
+  // Auto-hide loading states on page load
+  document.addEventListener('DOMContentLoaded', () => {
+    LoadingManager.hideOverlay();
+  });
+  
+  // Show loading overlay for navigation
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a[href]');
+    if (link && link.href && !link.href.startsWith('#') && !link.target) {
+      LoadingManager.showOverlay('Loading page...');
+    }
+  });
+</script>

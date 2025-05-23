@@ -1,0 +1,231 @@
+---
+// Enhanced SEO Head component for NosytLabs
+// Provides comprehensive meta tags, structured data, and social media optimization
+
+export interface Props {
+  title: string;
+  description: string;
+  image?: string;
+  url?: string;
+  type?: 'website' | 'article' | 'profile';
+  publishedTime?: string;
+  modifiedTime?: string;
+  author?: string;
+  tags?: string[];
+  noindex?: boolean;
+  canonical?: string;
+}
+
+const {
+  title,
+  description,
+  image = '/images/og-default.jpg',
+  url = Astro.url.href,
+  type = 'website',
+  publishedTime,
+  modifiedTime,
+  author = 'NosytLabs',
+  tags = [],
+  noindex = false,
+  canonical
+} = Astro.props;
+
+// Site configuration
+const siteName = 'NosytLabs';
+const siteUrl = 'https://nosytlabs.com';
+const twitterHandle = '@NosytLabs';
+const defaultImage = `${siteUrl}/images/og-default.jpg`;
+
+// Construct full URLs
+const fullUrl = url.startsWith('http') ? url : `${siteUrl}${url}`;
+const fullImage = image.startsWith('http') ? image : `${siteUrl}${image}`;
+const canonicalUrl = canonical ? (canonical.startsWith('http') ? canonical : `${siteUrl}${canonical}`) : fullUrl;
+
+// Generate structured data
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": type === 'article' ? 'Article' : 'WebPage',
+  "name": title,
+  "description": description,
+  "url": fullUrl,
+  "image": fullImage,
+  "author": {
+    "@type": "Person",
+    "name": author,
+    "url": `${siteUrl}/about`
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": siteName,
+    "url": siteUrl,
+    "logo": {
+      "@type": "ImageObject",
+      "url": `${siteUrl}/images/logo.png`
+    }
+  },
+  ...(publishedTime && { "datePublished": publishedTime }),
+  ...(modifiedTime && { "dateModified": modifiedTime }),
+  ...(tags.length > 0 && { "keywords": tags.join(', ') })
+};
+
+// Organization structured data for homepage
+const organizationData = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": siteName,
+  "url": siteUrl,
+  "logo": `${siteUrl}/images/logo.png`,
+  "description": "Notable Opportunities Shape Your Tomorrow - Web development, content creation, and technology services",
+  "founder": {
+    "@type": "Person",
+    "name": "NosytLabs Team"
+  },
+  "sameAs": [
+    "https://github.com/NosytLabs",
+    "https://www.youtube.com/@TycenYT",
+    "https://kick.com/Tycen"
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "contactType": "customer service",
+    "email": "info@nosytlabs.com",
+    "url": `${siteUrl}/contact`
+  }
+};
+---
+
+<!-- Basic Meta Tags -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content={description}>
+<meta name="author" content={author}>
+{tags.length > 0 && <meta name="keywords" content={tags.join(', ')}>}
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl}>
+
+<!-- Robots -->
+{noindex && <meta name="robots" content="noindex, nofollow">}
+
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content={type}>
+<meta property="og:url" content={fullUrl}>
+<meta property="og:title" content={title}>
+<meta property="og:description" content={description}>
+<meta property="og:image" content={fullImage}>
+<meta property="og:site_name" content={siteName}>
+{publishedTime && <meta property="article:published_time" content={publishedTime}>}
+{modifiedTime && <meta property="article:modified_time" content={modifiedTime}>}
+{author && <meta property="article:author" content={author}>}
+
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image">
+<meta property="twitter:url" content={fullUrl}>
+<meta property="twitter:title" content={title}>
+<meta property="twitter:description" content={description}>
+<meta property="twitter:image" content={fullImage}>
+<meta property="twitter:site" content={twitterHandle}>
+<meta property="twitter:creator" content={twitterHandle}>
+
+<!-- Additional Meta Tags -->
+<meta name="theme-color" content="#FF6B00">
+<meta name="msapplication-TileColor" content="#FF6B00">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content={siteName}>
+
+<!-- Favicon -->
+<link rel="icon" type="image/x-icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="manifest" href="/site.webmanifest">
+
+<!-- Preconnect to external domains -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://www.google-analytics.com">
+
+<!-- DNS Prefetch -->
+<link rel="dns-prefetch" href="//github.com">
+<link rel="dns-prefetch" href="//youtube.com">
+<link rel="dns-prefetch" href="//kick.com">
+
+<!-- Structured Data -->
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)}></script>
+
+<!-- Organization Data (for homepage) -->
+{Astro.url.pathname === '/' && (
+  <script type="application/ld+json" set:html={JSON.stringify(organizationData)}></script>
+)}
+
+<!-- Additional SEO Meta Tags -->
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<meta name="format-detection" content="email=no">
+
+<!-- Security Headers -->
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+
+<!-- Performance Hints -->
+<link rel="preload" href="/fonts/main.woff2" as="font" type="font/woff2" crossorigin>
+
+<!-- RSS Feed -->
+<link rel="alternate" type="application/rss+xml" title={`${siteName} RSS Feed`} href="/rss.xml">
+
+<!-- Sitemap -->
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+
+<style>
+  /* Critical CSS for above-the-fold content */
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #fff;
+  }
+
+  /* Dark mode support */
+  @media (prefers-color-scheme: dark) {
+    body {
+      color: #fff;
+      background-color: #1a1a1a;
+    }
+  }
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  /* Focus styles for accessibility */
+  *:focus {
+    outline: 2px solid #FF6B00;
+    outline-offset: 2px;
+  }
+
+  /* Skip to content link for screen readers */
+  .skip-to-content {
+    position: absolute;
+    top: -40px;
+    left: 6px;
+    background: #FF6B00;
+    color: white;
+    padding: 8px;
+    text-decoration: none;
+    border-radius: 4px;
+    z-index: 1000;
+  }
+
+  .skip-to-content:focus {
+    top: 6px;
+  }
+</style>
