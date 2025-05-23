@@ -4,7 +4,7 @@
       "id": "dev-tools",
       "title": "Development Tools",
       "shortDescription": "Development tools and resources to help streamline your coding workflow and improve productivity.",
-      "fullDescription": "We offer resources and guidance on development tools that can help improve your coding workflow. Based on our experience with tools like Cursor AI, VS Code extensions, and other productivity enhancers, we can provide recommendations tailored to your specific needs. Note that our services in this area are currently limited to consultation and guidance rather than full implementation.",
+      "fullDescription": "I share knowledge and recommendations about development tools that have helped improve my coding workflow. Based on my experience with tools like Cursor AI, VS Code extensions, and other productivity enhancers, I can provide guidance and resources. Currently offering consultation and knowledge sharing rather than full implementation services.",
       "icon": "🛠️",
       "iconType": "tools",
       "image": "/images/services/web-development.jpg",
@@ -45,16 +45,16 @@
       ],
       "caseStudies": [
         {
-          "title": "Development Workflow Optimization",
-          "client": "Fortune 500 Financial Institution",
-          "date": "May 2025",
-          "outcome": "25% reduction in development time and 40% improvement in code quality metrics"
+          "title": "Personal Development Setup",
+          "client": "Self-Implementation",
+          "date": "2025",
+          "outcome": "Optimized personal development workflow using Cursor AI and modern VS Code extensions, improving coding efficiency and learning speed"
         },
         {
-          "title": "Developer Productivity Enhancement",
-          "client": "Enterprise Software Company",
-          "date": "April 2025",
-          "outcome": "40% increase in developer productivity and 30% reduction in bugs by implementing modern development tools and practices"
+          "title": "Tool Recommendations for Fellow Developers",
+          "client": "Developer Community",
+          "date": "Ongoing",
+          "outcome": "Shared knowledge through content creation about development tools, helping other developers discover productivity-enhancing tools"
         }
       ]
     },
@@ -62,18 +62,18 @@
       "id": "vibe-coding",
       "title": "Vibe Coding",
       "shortDescription": "Custom web development with a focus on aesthetics, user experience, and unique visual identity.",
-      "fullDescription": "Our upcoming 'Vibe Coding' services will focus on creating visually stunning and unique web experiences that capture your brand's essence and personality. We combine modern frameworks like React and Astro with creative design principles to build websites that stand out from the crowd. This service is currently in development and will be launching soon.",
+      "fullDescription": "My approach to web development focuses on creating visually appealing and unique web experiences. I enjoy combining modern frameworks like React and Astro with creative design principles to build websites that have personality and character. This represents my personal style and approach to development projects.",
       "icon": "🌐",
       "iconType": "web",
       "image": "/images/services/web-development.jpg",
       "features": [
-        "Unique visual identity and aesthetic design",
-        "Custom animations and interactive elements",
-        "Immersive user experiences",
-        "Modern frameworks (React, Astro, Three.js)",
-        "Responsive design with visual flair",
-        "Brand personality integration",
-        "Coming soon (currently in development)"
+        "Creative visual design approach",
+        "Custom animations and interactions",
+        "Unique user experiences",
+        "Modern frameworks (React, Astro)",
+        "Responsive design with personality",
+        "Creative problem solving",
+        "Portfolio and personal projects focus"
       ],
       "caseStudies": [
         {

@@ -1,0 +1,320 @@
+---
+// About page for NosytLabs
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="About - NosytLabs"
+  description="Learn about NosytLabs and the journey behind Notable Opportunities Shape Your Tomorrow. Discover our mission, values, and the story of continuous learning in technology."
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-secondary text-white py-20 overflow-hidden">
+    <!-- Background particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particles-enhanced"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+          About <span class="text-accent">NosytLabs</span>
+        </h1>
+        <p class="text-xl mb-8 animate-fade-in" style="animation-delay: 0.2s;">
+          Notable Opportunities Shape Your Tomorrow
+        </p>
+        <div class="w-24 h-1 bg-accent mx-auto animate-fade-in" style="animation-delay: 0.4s;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Profile Image and Quick Info -->
+        <div class="lg:col-span-1">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700 sticky top-8">
+            <div class="text-center mb-6">
+              <div class="w-32 h-32 mx-auto mb-4 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-4xl font-bold">
+                NL
+              </div>
+              <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-2">NosytLabs</h2>
+              <p class="text-gray-600 dark:text-gray-300">Developer & Content Creator</p>
+            </div>
+
+            <div class="space-y-4">
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+                <span>Remote</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a2 2 0 012-2h4a2 2 0 012 2v4m-6 0V6a2 2 0 012-2h4a2 2 0 012 2v1m-6 0h6m-6 0l-1 1v4a2 2 0 002 2h2m-6-7h6m-6 4v1a2 2 0 002 2h2m-6-3h6" />
+                </svg>
+                <span>Est. 2025</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                </svg>
+                <span>Always Learning</span>
+              </div>
+            </div>
+
+            <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+              <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-3">Connect</h3>
+              <div class="flex space-x-3">
+                <a href="https://github.com/NosytLabs" target="_blank" rel="noopener noreferrer" class="social-icon-link">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path fill-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" clip-rule="evenodd" />
+                  </svg>
+                </a>
+                <a href="https://www.youtube.com/@TycenYT" target="_blank" rel="noopener noreferrer" class="social-icon-link">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z" />
+                  </svg>
+                </a>
+                <a href="https://kick.com/Tycen" target="_blank" rel="noopener noreferrer" class="social-icon-link">
+                  <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-2-3.5v-7l6 3.5-6 3.5z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Story Section -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">My Story</h2>
+            <div class="prose prose-lg dark:prose-invert max-w-none">
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                Welcome to NosytLabs! Founded in 2025, this portfolio represents my journey as a developer and content creator. The name embodies my core belief: <span class="font-semibold text-accent">Notable Opportunities Shape Your Tomorrow</span>.
+              </p>
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed mb-4">
+                I'm passionate about exploring new technologies, building practical solutions, and sharing knowledge through content creation. My work spans web development, AI integration, and creating educational content on platforms like YouTube (@TycenYT) and Kick.com.
+              </p>
+              <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                This portfolio showcases my actual projects, learning journey, and the authentic challenges I've faced while growing as a developer. Every project here represents real work, real learning, and real progress.
+              </p>
+            </div>
+          </div>
+
+          <!-- Mission & Values -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Mission & Values</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center mr-3 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-white">Continuous Learning</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Always exploring new technologies and improving skills</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center mr-3 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-white">Knowledge Sharing</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Creating content to help others learn and grow</p>
+                  </div>
+                </div>
+              </div>
+              <div class="space-y-4">
+                <div class="flex items-start">
+                  <div class="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center mr-3 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-white">Authentic Work</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Building real solutions to real problems</p>
+                  </div>
+                </div>
+                <div class="flex items-start">
+                  <div class="w-8 h-8 bg-accent/20 rounded-full flex items-center justify-center mr-3 mt-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h3 class="font-semibold text-gray-800 dark:text-white">Community Focus</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Contributing to the developer community</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Current Focus -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Current Focus</h2>
+            <div class="space-y-4">
+              <div class="flex items-center p-4 bg-accent/10 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                <div>
+                  <h3 class="font-semibold text-gray-800 dark:text-white">Web Development</h3>
+                  <p class="text-gray-600 dark:text-gray-300 text-sm">Building modern web applications with React, Astro, and TypeScript</p>
+                </div>
+              </div>
+              <div class="flex items-center p-4 bg-accent/10 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                </svg>
+                <div>
+                  <h3 class="font-semibold text-gray-800 dark:text-white">AI Integration</h3>
+                  <p class="text-gray-600 dark:text-gray-300 text-sm">Exploring AI tools and integrating them into development workflows</p>
+                </div>
+              </div>
+              <div class="flex items-center p-4 bg-accent/10 rounded-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-accent mr-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                </svg>
+                <div>
+                  <h3 class="font-semibold text-gray-800 dark:text-white">Content Creation</h3>
+                  <p class="text-gray-600 dark:text-gray-300 text-sm">Creating educational content on YouTube and live streaming on Kick.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Fun Facts -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-white mb-6">Beyond Code</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="text-2xl mb-2">🎮</div>
+                <h3 class="font-semibold text-gray-800 dark:text-white">Gaming</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Retro games and modern indies</p>
+              </div>
+              <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="text-2xl mb-2">🖨️</div>
+                <h3 class="font-semibold text-gray-800 dark:text-white">3D Printing</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Creating physical objects from digital designs</p>
+              </div>
+              <div class="text-center p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                <div class="text-2xl mb-2">📚</div>
+                <h3 class="font-semibold text-gray-800 dark:text-white">Learning</h3>
+                <p class="text-gray-600 dark:text-gray-300 text-sm">Always exploring new technologies</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Let's Connect</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Interested in collaborating or just want to chat about technology? I'd love to hear from you.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn btn-accent">Get In Touch</a>
+        <a href="/projects" class="btn btn-outline-light">View My Work</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .social-icon-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: rgba(255, 107, 0, 0.1);
+    border-radius: 50%;
+    color: var(--nosyt-orange-main);
+    transition: all 0.3s ease;
+  }
+
+  .social-icon-link:hover {
+    background-color: var(--nosyt-orange-main);
+    color: white;
+    transform: translateY(-2px);
+  }
+
+  .particles-enhanced {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: particlesEnhanced 30s linear infinite;
+  }
+
+  @keyframes particlesEnhanced {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+    25% {
+      transform: translateY(-15px) translateX(15px) scale(1.05);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+    75% {
+      transform: translateY(15px) translateX(-15px) scale(0.95);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-outline-light {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary);
+  }
+</style>

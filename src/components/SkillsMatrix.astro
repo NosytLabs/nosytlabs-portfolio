@@ -1,0 +1,301 @@
+---
+// Skills Matrix Component for NosytLabs
+// Displays technical skills with proficiency levels and learning goals
+
+interface Skill {
+  name: string;
+  level: number; // 1-100
+  category: string;
+  description?: string;
+}
+
+interface SkillCategory {
+  name: string;
+  skills: Skill[];
+  color: string;
+}
+
+const skillCategories: SkillCategory[] = [
+  {
+    name: "Frontend Development",
+    color: "bg-blue-500",
+    skills: [
+      { name: "HTML/CSS", level: 90, category: "frontend", description: "Semantic HTML, modern CSS, Flexbox, Grid" },
+      { name: "JavaScript", level: 85, category: "frontend", description: "ES6+, DOM manipulation, async/await" },
+      { name: "React", level: 75, category: "frontend", description: "Components, hooks, state management" },
+      { name: "TypeScript", level: 70, category: "frontend", description: "Type safety, interfaces, generics" },
+      { name: "Tailwind CSS", level: 80, category: "frontend", description: "Utility-first CSS framework" }
+    ]
+  },
+  {
+    name: "Frameworks & Tools",
+    color: "bg-green-500",
+    skills: [
+      { name: "Astro.js", level: 80, category: "framework", description: "Static site generation, component islands" },
+      { name: "Next.js", level: 65, category: "framework", description: "React framework, SSR, routing" },
+      { name: "Git", level: 75, category: "tools", description: "Version control, branching, collaboration" },
+      { name: "VS Code", level: 85, category: "tools", description: "Extensions, debugging, productivity" },
+      { name: "Node.js", level: 60, category: "backend", description: "Server-side JavaScript, npm packages" }
+    ]
+  },
+  {
+    name: "Design & UX",
+    color: "bg-purple-500",
+    skills: [
+      { name: "Responsive Design", level: 85, category: "design", description: "Mobile-first, cross-browser compatibility" },
+      { name: "UI/UX Principles", level: 70, category: "design", description: "User experience, accessibility" },
+      { name: "Animation", level: 65, category: "design", description: "CSS animations, transitions" },
+      { name: "Color Theory", level: 60, category: "design", description: "Color schemes, contrast, accessibility" }
+    ]
+  },
+  {
+    name: "Currently Learning",
+    color: "bg-orange-500",
+    skills: [
+      { name: "Python", level: 40, category: "learning", description: "Syntax, data structures, basic scripting" },
+      { name: "Database Design", level: 35, category: "learning", description: "SQL, relationships, optimization" },
+      { name: "AI Integration", level: 50, category: "learning", description: "API integration, prompt engineering" },
+      { name: "DevOps", level: 30, category: "learning", description: "CI/CD, deployment, containerization" },
+      { name: "Testing", level: 45, category: "learning", description: "Unit tests, integration tests, TDD" }
+    ]
+  }
+];
+
+// Helper function to get skill level text
+function getSkillLevelText(level: number): string {
+  if (level >= 80) return "Advanced";
+  if (level >= 60) return "Intermediate";
+  if (level >= 40) return "Beginner";
+  return "Learning";
+}
+
+// Helper function to get skill level color
+function getSkillLevelColor(level: number): string {
+  if (level >= 80) return "text-green-600 dark:text-green-400";
+  if (level >= 60) return "text-blue-600 dark:text-blue-400";
+  if (level >= 40) return "text-yellow-600 dark:text-yellow-400";
+  return "text-orange-600 dark:text-orange-400";
+}
+---
+
+<div class="skills-matrix">
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+    {skillCategories.map((category) => (
+      <div class="skill-category bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700">
+        <div class="flex items-center mb-6">
+          <div class={`w-4 h-4 rounded-full ${category.color} mr-3`}></div>
+          <h3 class="text-xl font-bold text-gray-800 dark:text-white">{category.name}</h3>
+        </div>
+        
+        <div class="space-y-4">
+          {category.skills.map((skill) => (
+            <div class="skill-item">
+              <div class="flex justify-between items-center mb-2">
+                <div class="flex items-center">
+                  <span class="font-medium text-gray-800 dark:text-white">{skill.name}</span>
+                  {skill.description && (
+                    <div class="ml-2 relative group">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-gray-400 cursor-help" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                      </svg>
+                      <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-2 bg-gray-900 text-white text-sm rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none whitespace-nowrap z-10">
+                        {skill.description}
+                        <div class="absolute top-full left-1/2 transform -translate-x-1/2 border-4 border-transparent border-t-gray-900"></div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <span class={`text-sm font-medium ${getSkillLevelColor(skill.level)}`}>
+                  {getSkillLevelText(skill.level)}
+                </span>
+              </div>
+              
+              <div class="skill-bar-container">
+                <div class="skill-bar">
+                  <div 
+                    class="skill-progress" 
+                    style={`width: ${skill.level}%`}
+                    data-level={skill.level}
+                  ></div>
+                </div>
+                <span class="skill-percentage text-xs text-gray-500 dark:text-gray-400 ml-2">
+                  {skill.level}%
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    ))}
+  </div>
+
+  <!-- Learning Goals Section -->
+  <div class="mt-12 bg-gradient-to-r from-primary/10 to-secondary/10 rounded-xl p-8 border border-primary/20">
+    <h3 class="text-2xl font-bold text-gray-800 dark:text-white mb-6 text-center">
+      2025 Learning Goals
+    </h3>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="learning-goal">
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center mr-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+            </svg>
+          </div>
+          <h4 class="font-semibold text-gray-800 dark:text-white">Backend Development</h4>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">
+          Master Python and database design to become a full-stack developer
+        </p>
+      </div>
+
+      <div class="learning-goal">
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 bg-secondary/20 rounded-full flex items-center justify-center mr-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-secondary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+            </svg>
+          </div>
+          <h4 class="font-semibold text-gray-800 dark:text-white">AI Integration</h4>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">
+          Deepen understanding of AI APIs and prompt engineering techniques
+        </p>
+      </div>
+
+      <div class="learning-goal">
+        <div class="flex items-center mb-3">
+          <div class="w-8 h-8 bg-green-500/20 rounded-full flex items-center justify-center mr-3">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+          </div>
+          <h4 class="font-semibold text-gray-800 dark:text-white">Testing & Quality</h4>
+        </div>
+        <p class="text-gray-600 dark:text-gray-300 text-sm">
+          Implement comprehensive testing strategies and code quality practices
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .skill-bar-container {
+    display: flex;
+    align-items: center;
+  }
+
+  .skill-bar {
+    flex: 1;
+    height: 8px;
+    background-color: rgba(156, 163, 175, 0.3);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--nosyt-orange-main), var(--nosyt-orange-light));
+    border-radius: 4px;
+    transition: width 0.8s ease-in-out;
+    position: relative;
+  }
+
+  .skill-progress::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shimmer 2s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  .skill-item {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    background-color: rgba(249, 250, 251, 0.5);
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .dark .skill-item {
+    background-color: rgba(31, 41, 55, 0.5);
+    border-color: rgba(75, 85, 99, 0.5);
+  }
+
+  .skill-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .skill-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .learning-goal {
+    padding: 1.5rem;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 0.75rem;
+    border: 1px solid rgba(229, 231, 235, 0.5);
+    transition: all 0.3s ease;
+  }
+
+  .dark .learning-goal {
+    background-color: rgba(31, 41, 55, 0.7);
+    border-color: rgba(75, 85, 99, 0.5);
+  }
+
+  .learning-goal:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  }
+
+  .dark .learning-goal:hover {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  }
+
+  /* Animation for skill bars on scroll */
+  .skill-progress[data-level] {
+    width: 0 !important;
+    animation: fillSkillBar 1.5s ease-out forwards;
+  }
+
+  @keyframes fillSkillBar {
+    from { width: 0; }
+    to { width: var(--target-width); }
+  }
+</style>
+
+<script>
+  // Animate skill bars when they come into view
+  document.addEventListener('DOMContentLoaded', () => {
+    const skillBars = document.querySelectorAll('.skill-progress[data-level]');
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const skillBar = entry.target as HTMLElement;
+          const level = skillBar.getAttribute('data-level');
+          if (level) {
+            skillBar.style.setProperty('--target-width', `${level}%`);
+            skillBar.style.width = `${level}%`;
+          }
+          observer.unobserve(skillBar);
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    skillBars.forEach((bar) => observer.observe(bar));
+  });
+</script>

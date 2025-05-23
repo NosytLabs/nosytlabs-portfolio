@@ -1,0 +1,542 @@
+---
+// Resume/CV page for NosytLabs
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Resume - NosytLabs"
+  description="View and download the resume of NosytLabs. Explore skills, experience, education, and technical expertise in web development, AI integration, and content creation."
+>
+  <!-- Hero Section -->
+  <section class="relative bg-gradient-to-br from-primary-dark via-primary to-secondary text-white py-20 overflow-hidden">
+    <!-- Background particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="particles-enhanced"></div>
+    </div>
+
+    <div class="container mx-auto px-4 relative z-10">
+      <div class="max-w-4xl mx-auto text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">
+          Resume & <span class="text-accent">CV</span>
+        </h1>
+        <p class="text-xl mb-8 animate-fade-in" style="animation-delay: 0.2s;">
+          Developer • Content Creator • Continuous Learner
+        </p>
+        <div class="flex flex-wrap justify-center gap-4 animate-fade-in" style="animation-delay: 0.4s;">
+          <a href="/documents/nosytlabs-resume.pdf" download class="btn btn-accent">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-4-4m4 4l4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Download PDF
+          </a>
+          <a href="/contact" class="btn btn-outline-light">
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Resume Content -->
+  <section class="py-16 bg-white dark:bg-gray-900">
+    <div class="container mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+        <!-- Sidebar -->
+        <div class="lg:col-span-1 space-y-8">
+          <!-- Contact Info -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Contact Information</h2>
+            <div class="space-y-3">
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                <span class="text-sm">info@nosytlabs.com</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 01-9-9m9 9H3m9 9v-9m0 9c-1.657 0-3-4.03-3-9s1.343-9 3-9m0 9c1.657 0 3-4.03 3-9s-1.343-9 3-9m-9 9a9 9 0 019-9" />
+                </svg>
+                <span class="text-sm">nosytlabs.com</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-3 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                </svg>
+                <span class="text-sm">Remote</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Skills -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Technical Skills</h2>
+            <div class="space-y-4">
+              <div>
+                <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">Frontend</h3>
+                <div class="space-y-2">
+                  <div class="skill-item">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm text-gray-600 dark:text-gray-400">JavaScript</span>
+                      <span class="text-sm text-accent">Advanced</span>
+                    </div>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 85%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm text-gray-600 dark:text-gray-400">React</span>
+                      <span class="text-sm text-accent">Intermediate</span>
+                    </div>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 75%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm text-gray-600 dark:text-gray-400">TypeScript</span>
+                      <span class="text-sm text-accent">Intermediate</span>
+                    </div>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 70%"></div>
+                    </div>
+                  </div>
+                  <div class="skill-item">
+                    <div class="flex justify-between items-center mb-1">
+                      <span class="text-sm text-gray-600 dark:text-gray-400">HTML/CSS</span>
+                      <span class="text-sm text-accent">Advanced</span>
+                    </div>
+                    <div class="skill-bar">
+                      <div class="skill-progress" style="width: 90%"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">Frameworks & Tools</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="skill-tag">Astro.js</span>
+                  <span class="skill-tag">Next.js</span>
+                  <span class="skill-tag">Tailwind CSS</span>
+                  <span class="skill-tag">Node.js</span>
+                  <span class="skill-tag">Git</span>
+                  <span class="skill-tag">VS Code</span>
+                </div>
+              </div>
+
+              <div>
+                <h3 class="font-semibold text-gray-700 dark:text-gray-300 mb-2">Currently Learning</h3>
+                <div class="flex flex-wrap gap-2">
+                  <span class="learning-tag">AI Integration</span>
+                  <span class="learning-tag">Python</span>
+                  <span class="learning-tag">Database Design</span>
+                  <span class="learning-tag">DevOps</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Languages -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Languages</h2>
+            <div class="space-y-2">
+              <div class="flex justify-between items-center">
+                <span class="text-gray-600 dark:text-gray-300">English</span>
+                <span class="text-accent font-medium">Native</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interests -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-xl font-bold text-gray-800 dark:text-white mb-4">Interests</h2>
+            <div class="space-y-2">
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <span class="text-accent mr-2">•</span>
+                <span class="text-sm">Open Source Development</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <span class="text-accent mr-2">•</span>
+                <span class="text-sm">AI & Machine Learning</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <span class="text-accent mr-2">•</span>
+                <span class="text-sm">3D Printing & Making</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <span class="text-accent mr-2">•</span>
+                <span class="text-sm">Content Creation</span>
+              </div>
+              <div class="flex items-center text-gray-600 dark:text-gray-300">
+                <span class="text-accent mr-2">•</span>
+                <span class="text-sm">Retro Computing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="lg:col-span-2 space-y-8">
+          <!-- Professional Summary -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-4">Professional Summary</h2>
+            <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+              Passionate developer and content creator with a focus on modern web technologies and AI integration. 
+              Founded NosytLabs in 2025 as a platform to showcase projects and share knowledge with the developer community. 
+              Experienced in building responsive web applications, creating educational content, and exploring emerging technologies. 
+              Committed to continuous learning and contributing to open-source projects.
+            </p>
+          </div>
+
+          <!-- Experience -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Experience</h2>
+            <div class="space-y-6">
+              <div class="experience-item">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Founder & Developer</h3>
+                  <span class="text-accent font-medium">2025 - Present</span>
+                </div>
+                <h4 class="text-gray-600 dark:text-gray-400 mb-2">NosytLabs</h4>
+                <ul class="text-gray-600 dark:text-gray-300 space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Founded and developed NosytLabs portfolio website using Astro.js, React, and TypeScript</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Created unique Windows 95-inspired interface (NosytOS95) with working applications and games</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Developed multiple web applications including prompt engineering platform and API integrations</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Implemented responsive design, performance optimization, and SEO best practices</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="experience-item">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Content Creator</h3>
+                  <span class="text-accent font-medium">2025 - Present</span>
+                </div>
+                <h4 class="text-gray-600 dark:text-gray-400 mb-2">YouTube (@TycenYT) & Kick.com</h4>
+                <ul class="text-gray-600 dark:text-gray-300 space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Create educational content about web development, AI tools, and technology reviews</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Live stream coding sessions and tech discussions on Kick.com platform</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Share knowledge about development tools, frameworks, and best practices</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Engage with developer community and provide educational resources</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="experience-item">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Self-Directed Learning</h3>
+                  <span class="text-accent font-medium">2024 - Present</span>
+                </div>
+                <h4 class="text-gray-600 dark:text-gray-400 mb-2">Web Development & Technology</h4>
+                <ul class="text-gray-600 dark:text-gray-300 space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Intensive study of modern web development frameworks and technologies</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Hands-on experience with React, TypeScript, Astro.js, and Node.js</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Exploration of AI integration, API development, and modern development tools</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Built multiple projects to apply learned concepts and gain practical experience</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Projects -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Key Projects</h2>
+            <div class="space-y-6">
+              <div class="project-item">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Promptpedia Platform</h3>
+                  <span class="text-accent font-medium">2025</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-2">
+                  Modern prompt engineering platform built with Next.js, React, and TypeScript for AI prompt optimization.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tech-tag">Next.js</span>
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">TypeScript</span>
+                  <span class="tech-tag">AI Integration</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-lg font-semibold text-gray-800 dark:text-white">Kick API MCP</h3>
+                  <span class="text-accent font-medium">2025</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-2">
+                  Model Context Protocol implementation for Kick.com streaming platform API integration.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tech-tag">JavaScript</span>
+                  <span class="tech-tag">API Integration</span>
+                  <span class="tech-tag">MCP</span>
+                  <span class="tech-tag">Streaming Platforms</span>
+                </div>
+              </div>
+
+              <div class="project-item">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-2">
+                  <h3 class="text-lg font-semibold text-gray-800 dark:text-white">NosytLabs Portfolio</h3>
+                  <span class="text-accent font-medium">2025</span>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-2">
+                  Comprehensive portfolio website with unique Windows 95 interface, built with Astro.js and modern web technologies.
+                </p>
+                <div class="flex flex-wrap gap-2">
+                  <span class="tech-tag">Astro.js</span>
+                  <span class="tech-tag">React</span>
+                  <span class="tech-tag">Tailwind CSS</span>
+                  <span class="tech-tag">JavaScript</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Education & Learning -->
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-8 shadow-xl border border-gray-100 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-white mb-6">Education & Learning</h2>
+            <div class="space-y-6">
+              <div class="education-item">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">Self-Directed Web Development</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-2">
+                  Comprehensive study of modern web development through online resources, documentation, and hands-on projects.
+                </p>
+                <ul class="text-gray-600 dark:text-gray-300 space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>JavaScript fundamentals and advanced concepts</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>React ecosystem and component-based architecture</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>TypeScript for type-safe development</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Modern build tools and development workflows</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="education-item">
+                <h3 class="text-lg font-semibold text-gray-800 dark:text-white mb-2">Continuous Learning</h3>
+                <p class="text-gray-600 dark:text-gray-300 mb-2">
+                  Ongoing exploration of emerging technologies and development practices.
+                </p>
+                <ul class="text-gray-600 dark:text-gray-300 space-y-1">
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>AI integration and prompt engineering</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>API development and integration patterns</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Performance optimization and SEO best practices</span>
+                  </li>
+                  <li class="flex items-start">
+                    <span class="text-accent mr-2 mt-1">•</span>
+                    <span>Open source contribution and community engagement</span>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-16 bg-gradient-to-r from-primary to-secondary text-white">
+    <div class="container mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-4">Let's Work Together</h2>
+      <p class="text-xl mb-8 max-w-2xl mx-auto">
+        Interested in collaborating on a project or discussing opportunities? I'd love to hear from you.
+      </p>
+      <div class="flex flex-wrap justify-center gap-4">
+        <a href="/contact" class="btn btn-accent">Get In Touch</a>
+        <a href="/projects" class="btn btn-outline-light">View My Projects</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  /* Skill bars */
+  .skill-bar {
+    width: 100%;
+    height: 6px;
+    background-color: rgba(156, 163, 175, 0.3);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .skill-progress {
+    height: 100%;
+    background: linear-gradient(90deg, var(--nosyt-orange-main), var(--nosyt-orange-light));
+    border-radius: 3px;
+    transition: width 0.8s ease-in-out;
+  }
+
+  /* Skill tags */
+  .skill-tag {
+    display: inline-block;
+    background-color: rgba(255, 107, 0, 0.1);
+    color: var(--nosyt-orange-main);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(255, 107, 0, 0.2);
+  }
+
+  .learning-tag {
+    display: inline-block;
+    background-color: rgba(76, 29, 149, 0.1);
+    color: var(--primary);
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(76, 29, 149, 0.2);
+  }
+
+  .tech-tag {
+    display: inline-block;
+    background-color: rgba(107, 114, 128, 0.1);
+    color: #374151;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.375rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border: 1px solid rgba(107, 114, 128, 0.2);
+  }
+
+  .dark .tech-tag {
+    background-color: rgba(156, 163, 175, 0.1);
+    color: #D1D5DB;
+    border-color: rgba(156, 163, 175, 0.2);
+  }
+
+  /* Experience and project items */
+  .experience-item,
+  .project-item,
+  .education-item {
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid rgba(156, 163, 175, 0.2);
+  }
+
+  .experience-item:last-child,
+  .project-item:last-child,
+  .education-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  /* Particles animation */
+  .particles-enhanced {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+      radial-gradient(circle at 10% 10%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 50% 20%, rgba(255, 255, 255, 0.2) 1px, transparent 1px),
+      radial-gradient(circle at 70% 60%, rgba(255, 255, 255, 0.3) 2px, transparent 2px),
+      radial-gradient(circle at 90% 30%, rgba(255, 255, 255, 0.2) 1px, transparent 1px);
+    background-size: 100px 100px;
+    animation: particlesEnhanced 30s linear infinite;
+  }
+
+  @keyframes particlesEnhanced {
+    0% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+    25% {
+      transform: translateY(-15px) translateX(15px) scale(1.05);
+      opacity: 0.9;
+    }
+    50% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+    75% {
+      transform: translateY(15px) translateX(-15px) scale(0.95);
+      opacity: 0.9;
+    }
+    100% {
+      transform: translateY(0) translateX(0) scale(1);
+      opacity: 0.7;
+    }
+  }
+
+  .animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-in-out forwards;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .btn-outline-light {
+    background-color: transparent;
+    border: 2px solid white;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .btn-outline-light:hover {
+    background-color: white;
+    color: var(--primary);
+  }
+</style>
