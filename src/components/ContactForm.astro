@@ -191,7 +191,7 @@ const {
   </div>
 </section>
 
-<script define:vars={{ successMessage, errorMessage }}>
+<script type="module" define:vars={{ successMessage, errorMessage }}>
   document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('contact-form');
     const formMessage = document.querySelector('.form-message');
@@ -291,27 +291,35 @@ const {
         submitButton.disabled = true;
 
         try {
-          const formData = new FormData(form);
+          // Import email service
+          const { formHandlers } = await import('../../utils/emailService.js');
 
-          // Simulate API call (replace with actual API call in production)
-          await new Promise(resolve => setTimeout(resolve, 1500));
+          // Submit form using email service
+          const result = await formHandlers.handleContactForm(form);
 
-          // Success
-          formMessage.textContent = successMessage;
-          formMessage.classList.add('form-message--success');
-          formMessage.classList.remove('form-message--error');
-          form.reset();
+          if (result.success) {
+            // Success
+            formMessage.textContent = result.message || successMessage;
+            formMessage.classList.add('form-message--success');
+            formMessage.classList.remove('form-message--error');
+            form.reset();
 
-          // Reset file name display if present
-          if (fileName) {
-            fileName.textContent = 'No file chosen';
+            // Reset file name display if present
+            if (fileName) {
+              fileName.textContent = 'No file chosen';
+            }
+
+            // Show success animation
+            const successAnimation = document.createElement('div');
+            successAnimation.className = 'success-animation';
+            successAnimation.innerHTML = '<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>';
+            formMessage.appendChild(successAnimation);
+          } else {
+            // Show error from service
+            formMessage.textContent = result.message || errorMessage;
+            formMessage.classList.add('form-message--error');
+            formMessage.classList.remove('form-message--success');
           }
-
-          // Show success animation
-          const successAnimation = document.createElement('div');
-          successAnimation.className = 'success-animation';
-          successAnimation.innerHTML = '<svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle class="checkmark-circle" cx="26" cy="26" r="25" fill="none"/><path class="checkmark-check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>';
-          formMessage.appendChild(successAnimation);
         } catch (error) {
           // Network error
           formMessage.textContent = errorMessage;

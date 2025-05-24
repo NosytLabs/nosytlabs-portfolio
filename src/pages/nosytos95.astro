@@ -7,6 +7,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 <script is:inline src="/scripts/nosytos95-part3.js"></script>
 <script is:inline src="/scripts/nosytos95-part4.js"></script>
 
+<!-- New Applications -->
+<script is:inline src="/scripts/nosytos95/calculator.js"></script>
+<script is:inline src="/scripts/nosytos95/paint.js"></script>
+<script is:inline src="/scripts/nosytos95/mediaplayer.js"></script>
+
 <BaseLayout
   title="NosytOS95 - NosytLabs"
   description="Experience the retro Windows 95 aesthetic with NosytOS95, featuring classic applications and games."
@@ -38,6 +43,24 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       <div class="desktop-icon" data-app="terminal">
         <img src="/images/win95/utilities-terminal.png" alt="Terminal" class="icon-img">
         <span class="icon-text">Terminal</span>
+      </div>
+
+      <!-- Calculator -->
+      <div class="desktop-icon" data-app="calculator">
+        <img src="/images/win95/calculator.png" alt="Calculator" class="icon-img">
+        <span class="icon-text">Calculator</span>
+      </div>
+
+      <!-- Paint -->
+      <div class="desktop-icon" data-app="paint">
+        <img src="/images/win95/paint.png" alt="Paint" class="icon-img">
+        <span class="icon-text">Paint</span>
+      </div>
+
+      <!-- Media Player -->
+      <div class="desktop-icon" data-app="mediaplayer">
+        <img src="/images/win95/mediaplayer.png" alt="Media Player" class="icon-img">
+        <span class="icon-text">Media Player</span>
       </div>
 
       <!-- Help -->
@@ -265,6 +288,18 @@ import BaseLayout from '../layouts/BaseLayout.astro';
             <div class="submenu-item" data-app="terminal">
               <img src="/images/win95/utilities-terminal.png" alt="Terminal">
               <span>Terminal</span>
+            </div>
+            <div class="submenu-item" data-app="calculator">
+              <img src="/images/win95/calculator.png" alt="Calculator">
+              <span>Calculator</span>
+            </div>
+            <div class="submenu-item" data-app="paint">
+              <img src="/images/win95/paint.png" alt="Paint">
+              <span>Paint</span>
+            </div>
+            <div class="submenu-item" data-app="mediaplayer">
+              <img src="/images/win95/mediaplayer.png" alt="Media Player">
+              <span>Media Player</span>
             </div>
           </div>
         </div>
@@ -1274,6 +1309,30 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       // Special handling for Help
       if (app === 'help') {
         initHelp();
+      }
+
+      // Special handling for Calculator
+      if (app === 'calculator') {
+        if (window.nosytCalculator) {
+          window.nosytCalculator.openCalculator();
+        }
+        return; // Calculator creates its own window
+      }
+
+      // Special handling for Paint
+      if (app === 'paint') {
+        if (window.nosytPaint) {
+          window.nosytPaint.openPaint();
+        }
+        return; // Paint creates its own window
+      }
+
+      // Special handling for Media Player
+      if (app === 'mediaplayer') {
+        if (window.nosytMediaPlayer) {
+          window.nosytMediaPlayer.openMediaPlayer();
+        }
+        return; // Media Player creates its own window
       }
 
       updateTaskbar();

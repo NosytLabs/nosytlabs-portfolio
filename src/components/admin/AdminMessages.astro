@@ -1,0 +1,704 @@
+---
+/**
+ * Admin Messages Component
+ * Displays contact form submissions, bookings, and newsletter subscriptions
+ */
+
+interface Props {
+  title?: string;
+}
+
+const { title = "Messages & Submissions" } = Astro.props;
+---
+
+<div class="admin-messages">
+  <div class="messages-header">
+    <h2>{title}</h2>
+    <div class="messages-stats">
+      <div class="stat-card">
+        <div class="stat-number" id="contact-count">0</div>
+        <div class="stat-label">Contact Forms</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="booking-count">0</div>
+        <div class="stat-label">Service Bookings</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" id="newsletter-count">0</div>
+        <div class="stat-label">Newsletter Subs</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="messages-tabs">
+    <button class="tab-btn active" data-tab="contact">Contact Forms</button>
+    <button class="tab-btn" data-tab="bookings">Service Bookings</button>
+    <button class="tab-btn" data-tab="newsletter">Newsletter</button>
+  </div>
+
+  <div class="messages-content">
+    <!-- Contact Forms Tab -->
+    <div class="tab-content active" id="contact-tab">
+      <div class="messages-toolbar">
+        <div class="search-box">
+          <input type="text" id="contact-search" placeholder="Search contact forms...">
+          <button class="search-btn">🔍</button>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn-secondary" id="export-contact">Export CSV</button>
+          <button class="btn-danger" id="clear-contact">Clear All</button>
+        </div>
+      </div>
+      <div class="messages-list" id="contact-list">
+        <div class="empty-state">
+          <div class="empty-icon">📧</div>
+          <h3>No contact forms yet</h3>
+          <p>Contact form submissions will appear here</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service Bookings Tab -->
+    <div class="tab-content" id="bookings-tab">
+      <div class="messages-toolbar">
+        <div class="search-box">
+          <input type="text" id="booking-search" placeholder="Search bookings...">
+          <button class="search-btn">🔍</button>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn-secondary" id="export-bookings">Export CSV</button>
+          <button class="btn-danger" id="clear-bookings">Clear All</button>
+        </div>
+      </div>
+      <div class="messages-list" id="bookings-list">
+        <div class="empty-state">
+          <div class="empty-icon">📅</div>
+          <h3>No service bookings yet</h3>
+          <p>Service booking requests will appear here</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Newsletter Tab -->
+    <div class="tab-content" id="newsletter-tab">
+      <div class="messages-toolbar">
+        <div class="search-box">
+          <input type="text" id="newsletter-search" placeholder="Search subscribers...">
+          <button class="search-btn">🔍</button>
+        </div>
+        <div class="toolbar-actions">
+          <button class="btn-secondary" id="export-newsletter">Export CSV</button>
+          <button class="btn-danger" id="clear-newsletter">Clear All</button>
+        </div>
+      </div>
+      <div class="messages-list" id="newsletter-list">
+        <div class="empty-state">
+          <div class="empty-icon">📰</div>
+          <h3>No newsletter subscribers yet</h3>
+          <p>Newsletter subscriptions will appear here</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .admin-messages {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+  }
+
+  .messages-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    background: linear-gradient(135deg, #4C1D95, #FF6B00);
+    color: white;
+  }
+
+  .messages-header h2 {
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .messages-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.875rem;
+    opacity: 0.9;
+  }
+
+  .messages-tabs {
+    display: flex;
+    background: #f9fafb;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  .tab-btn {
+    flex: 1;
+    padding: 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+    color: #6b7280;
+    transition: all 0.2s ease;
+    border-bottom: 3px solid transparent;
+  }
+
+  .tab-btn:hover {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  .tab-btn.active {
+    background: white;
+    color: #4C1D95;
+    border-bottom-color: #4C1D95;
+  }
+
+  .messages-content {
+    position: relative;
+  }
+
+  .tab-content {
+    display: none;
+    padding: 1.5rem;
+  }
+
+  .tab-content.active {
+    display: block;
+  }
+
+  .messages-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+  }
+
+  .search-box {
+    display: flex;
+    align-items: center;
+    background: #f9fafb;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    overflow: hidden;
+    flex: 1;
+    max-width: 400px;
+  }
+
+  .search-box input {
+    flex: 1;
+    padding: 0.75rem;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 0.875rem;
+  }
+
+  .search-btn {
+    padding: 0.75rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #6b7280;
+  }
+
+  .toolbar-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .btn-secondary {
+    padding: 0.75rem 1rem;
+    background: #6b7280;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: #4b5563;
+  }
+
+  .btn-danger {
+    padding: 0.75rem 1rem;
+    background: #dc2626;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background 0.2s ease;
+  }
+
+  .btn-danger:hover {
+    background: #b91c1c;
+  }
+
+  .messages-list {
+    max-height: 600px;
+    overflow-y: auto;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .empty-state h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+  }
+
+  .message-item {
+    background: #f9fafb;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    transition: all 0.2s ease;
+  }
+
+  .message-item:hover {
+    background: #f3f4f6;
+    border-color: #d1d5db;
+  }
+
+  .message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 0.75rem;
+  }
+
+  .message-info h4 {
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .message-meta {
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  .message-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .action-btn {
+    padding: 0.25rem 0.5rem;
+    background: none;
+    border: 1px solid #d1d5db;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: #6b7280;
+    transition: all 0.2s ease;
+  }
+
+  .action-btn:hover {
+    background: #f3f4f6;
+    border-color: #9ca3af;
+  }
+
+  .message-content {
+    background: white;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid #e5e7eb;
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+
+  .message-field {
+    margin-bottom: 0.5rem;
+  }
+
+  .field-label {
+    font-weight: 500;
+    color: #374151;
+    margin-right: 0.5rem;
+  }
+
+  .field-value {
+    color: #6b7280;
+  }
+
+  /* Responsive design */
+  @media (max-width: 768px) {
+    .messages-toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .search-box {
+      max-width: none;
+    }
+
+    .toolbar-actions {
+      justify-content: center;
+    }
+
+    .messages-stats {
+      grid-template-columns: 1fr;
+    }
+
+    .tab-btn {
+      font-size: 0.875rem;
+      padding: 0.75rem;
+    }
+  }
+</style>
+
+<script type="module">
+  import emailService from '../../utils/emailService.js';
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Tab switching
+    const tabBtns = document.querySelectorAll('.tab-btn');
+    const tabContents = document.querySelectorAll('.tab-content');
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const tabId = btn.dataset.tab;
+        
+        // Update active tab button
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update active tab content
+        tabContents.forEach(content => {
+          content.classList.remove('active');
+        });
+        document.getElementById(`${tabId}-tab`).classList.add('active');
+        
+        // Load data for the active tab
+        loadTabData(tabId);
+      });
+    });
+
+    // Load initial data
+    loadTabData('contact');
+    updateStats();
+
+    // Search functionality
+    setupSearch('contact');
+    setupSearch('bookings');
+    setupSearch('newsletter');
+
+    // Export functionality
+    setupExport('contact');
+    setupExport('bookings');
+    setupExport('newsletter');
+
+    // Clear functionality
+    setupClear('contact');
+    setupClear('bookings');
+    setupClear('newsletter');
+
+    function loadTabData(tab) {
+      switch (tab) {
+        case 'contact':
+          loadContactForms();
+          break;
+        case 'bookings':
+          loadBookings();
+          break;
+        case 'newsletter':
+          loadNewsletterSubscriptions();
+          break;
+      }
+    }
+
+    function loadContactForms() {
+      const submissions = emailService.getContactSubmissions();
+      const container = document.getElementById('contact-list');
+      
+      if (submissions.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📧</div>
+            <h3>No contact forms yet</h3>
+            <p>Contact form submissions will appear here</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = submissions.map(submission => `
+        <div class="message-item" data-id="${submission.id}">
+          <div class="message-header">
+            <div class="message-info">
+              <h4>${submission.name}</h4>
+              <div class="message-meta">
+                ${submission.email} • ${new Date(submission.timestamp).toLocaleString()}
+              </div>
+            </div>
+            <div class="message-actions">
+              <button class="action-btn" onclick="replyToContact('${submission.email}')">Reply</button>
+              <button class="action-btn" onclick="deleteMessage('contact', '${submission.id}')">Delete</button>
+            </div>
+          </div>
+          <div class="message-content">
+            <div class="message-field">
+              <span class="field-label">Subject:</span>
+              <span class="field-value">${submission.subject}</span>
+            </div>
+            <div class="message-field">
+              <span class="field-label">Message:</span>
+              <div class="field-value">${submission.message.replace(/\n/g, '<br>')}</div>
+            </div>
+            <div class="message-field">
+              <span class="field-label">IP:</span>
+              <span class="field-value">${submission.ip}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadBookings() {
+      const bookings = emailService.getBookingSubmissions();
+      const container = document.getElementById('bookings-list');
+      
+      if (bookings.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📅</div>
+            <h3>No service bookings yet</h3>
+            <p>Service booking requests will appear here</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = bookings.map(booking => `
+        <div class="message-item" data-id="${booking.id}">
+          <div class="message-header">
+            <div class="message-info">
+              <h4>${booking.name}</h4>
+              <div class="message-meta">
+                ${booking.email} • ${new Date(booking.timestamp).toLocaleString()}
+              </div>
+            </div>
+            <div class="message-actions">
+              <button class="action-btn" onclick="replyToContact('${booking.email}')">Reply</button>
+              <button class="action-btn" onclick="deleteMessage('bookings', '${booking.id}')">Delete</button>
+            </div>
+          </div>
+          <div class="message-content">
+            <div class="message-field">
+              <span class="field-label">Service:</span>
+              <span class="field-value">${booking.service}</span>
+            </div>
+            <div class="message-field">
+              <span class="field-label">Budget:</span>
+              <span class="field-value">${booking.budget || 'Not specified'}</span>
+            </div>
+            <div class="message-field">
+              <span class="field-label">Timeline:</span>
+              <span class="field-value">${booking.timeline || 'Not specified'}</span>
+            </div>
+            <div class="message-field">
+              <span class="field-label">Description:</span>
+              <div class="field-value">${(booking.description || 'No description provided').replace(/\n/g, '<br>')}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function loadNewsletterSubscriptions() {
+      const subscriptions = emailService.getNewsletterSubscriptions();
+      const container = document.getElementById('newsletter-list');
+      
+      if (subscriptions.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">📰</div>
+            <h3>No newsletter subscribers yet</h3>
+            <p>Newsletter subscriptions will appear here</p>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = subscriptions.map(subscription => `
+        <div class="message-item" data-id="${subscription.id}">
+          <div class="message-header">
+            <div class="message-info">
+              <h4>${subscription.name || 'Anonymous'}</h4>
+              <div class="message-meta">
+                ${subscription.email} • ${new Date(subscription.timestamp).toLocaleString()}
+              </div>
+            </div>
+            <div class="message-actions">
+              <button class="action-btn" onclick="deleteMessage('newsletter', '${subscription.id}')">Remove</button>
+            </div>
+          </div>
+          <div class="message-content">
+            <div class="message-field">
+              <span class="field-label">Source:</span>
+              <span class="field-value">${subscription.source}</span>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function updateStats() {
+      const contactCount = emailService.getContactSubmissions().length;
+      const bookingCount = emailService.getBookingSubmissions().length;
+      const newsletterCount = emailService.getNewsletterSubscriptions().length;
+
+      document.getElementById('contact-count').textContent = contactCount;
+      document.getElementById('booking-count').textContent = bookingCount;
+      document.getElementById('newsletter-count').textContent = newsletterCount;
+    }
+
+    function setupSearch(type) {
+      const searchInput = document.getElementById(`${type}-search`);
+      searchInput.addEventListener('input', (e) => {
+        const query = e.target.value.toLowerCase();
+        const items = document.querySelectorAll(`#${type}-list .message-item`);
+        
+        items.forEach(item => {
+          const text = item.textContent.toLowerCase();
+          item.style.display = text.includes(query) ? 'block' : 'none';
+        });
+      });
+    }
+
+    function setupExport(type) {
+      const exportBtn = document.getElementById(`export-${type}`);
+      exportBtn.addEventListener('click', () => {
+        let data = [];
+        
+        switch (type) {
+          case 'contact':
+            data = emailService.getContactSubmissions();
+            break;
+          case 'bookings':
+            data = emailService.getBookingSubmissions();
+            break;
+          case 'newsletter':
+            data = emailService.getNewsletterSubscriptions();
+            break;
+        }
+
+        if (data.length === 0) {
+          alert('No data to export');
+          return;
+        }
+
+        exportToCSV(data, `nosytlabs-${type}-${new Date().toISOString().split('T')[0]}.csv`);
+      });
+    }
+
+    function setupClear(type) {
+      const clearBtn = document.getElementById(`clear-${type}`);
+      clearBtn.addEventListener('click', () => {
+        if (confirm(`Are you sure you want to clear all ${type} data? This cannot be undone.`)) {
+          localStorage.removeItem(`nosytlabs_${type}_submissions`);
+          loadTabData(type);
+          updateStats();
+        }
+      });
+    }
+
+    function exportToCSV(data, filename) {
+      if (data.length === 0) return;
+
+      const headers = Object.keys(data[0]);
+      const csvContent = [
+        headers.join(','),
+        ...data.map(row => 
+          headers.map(header => {
+            const value = row[header] || '';
+            return `"${value.toString().replace(/"/g, '""')}"`;
+          }).join(',')
+        )
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv' });
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      a.click();
+      window.URL.revokeObjectURL(url);
+    }
+
+    // Global functions for button actions
+    window.replyToContact = function(email) {
+      window.location.href = `mailto:${email}`;
+    };
+
+    window.deleteMessage = function(type, id) {
+      if (confirm('Are you sure you want to delete this message?')) {
+        let storageKey = '';
+        switch (type) {
+          case 'contact':
+            storageKey = 'nosytlabs_contact_submissions';
+            break;
+          case 'bookings':
+            storageKey = 'nosytlabs_booking_submissions';
+            break;
+          case 'newsletter':
+            storageKey = 'nosytlabs_newsletter_subscriptions';
+            break;
+        }
+
+        const data = JSON.parse(localStorage.getItem(storageKey) || '[]');
+        const filteredData = data.filter(item => item.id !== id);
+        localStorage.setItem(storageKey, JSON.stringify(filteredData));
+        
+        loadTabData(type);
+        updateStats();
+      }
+    };
+
+    // Auto-refresh data every 30 seconds
+    setInterval(() => {
+      const activeTab = document.querySelector('.tab-btn.active').dataset.tab;
+      loadTabData(activeTab);
+      updateStats();
+    }, 30000);
+  });
+</script>

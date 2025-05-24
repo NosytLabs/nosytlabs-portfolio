@@ -5,46 +5,67 @@ import AdminSidebar from '../../components/admin/AdminSidebar.astro';
 import AdminHeader from '../../components/admin/AdminHeader.astro';
 import AdminDashboard from '../../components/admin/AdminDashboard.astro';
 
-// Check if user is authenticated (this will be replaced with actual auth logic)
-const isAuthenticated = true; // Placeholder for authentication check
+// Authentication will be handled client-side
+const isAuthenticated = false; // Will be checked via JavaScript
 ---
 
-{isAuthenticated ? (
-  <BaseLayout 
-    title="Admin Panel - NosytLabs" 
-    description="NosytLabs Admin Panel for managing content"
-  >
-    <div class="admin-container">
-      <AdminSidebar />
-      <div class="admin-content">
-        <AdminHeader title="Dashboard" />
-        <AdminDashboard />
-      </div>
-    </div>
-  </BaseLayout>
-) : (
-  <BaseLayout 
-    title="Admin Login - NosytLabs" 
-    description="NosytLabs Admin Login"
-  >
-    <div class="login-container">
-      <div class="login-form">
+<BaseLayout
+  title="Admin Panel - NosytLabs"
+  description="NosytLabs Admin Panel for managing content"
+>
+  <!-- Login Form (shown when not authenticated) -->
+  <div id="login-container" class="login-container">
+    <div class="login-form">
+      <div class="login-header">
+        <img src="/images/logo.svg" alt="NosytLabs" class="login-logo">
         <h1>Admin Login</h1>
-        <form id="login-form" method="post">
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username" required>
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" required>
-          </div>
-          <button type="submit" class="btn-primary">Login</button>
-        </form>
+        <p>Access the NosytLabs administration panel</p>
+      </div>
+
+      <form id="login-form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username" required autocomplete="username">
+        </div>
+
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required autocomplete="current-password">
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" id="remember" name="remember">
+            <span class="checkmark"></span>
+            Remember me
+          </label>
+        </div>
+
+        <button type="submit" class="btn-primary" id="login-btn">
+          <span class="btn-text">Login</span>
+          <span class="btn-loading" style="display: none;">Logging in...</span>
+        </button>
+
+        <div id="login-error" class="error-message" style="display: none;"></div>
+      </form>
+
+      <div class="login-footer">
+        <p><strong>Demo Credentials:</strong></p>
+        <p>Username: <code>admin</code> | Password: <code>password</code></p>
+        <p>Username: <code>nosytlabs</code> | Password: <code>password</code></p>
       </div>
     </div>
-  </BaseLayout>
-)}
+  </div>
+
+  <!-- Admin Dashboard (shown when authenticated) -->
+  <div id="admin-container" class="admin-container" style="display: none;">
+    <AdminSidebar />
+    <div class="admin-content">
+      <AdminHeader title="Dashboard" />
+      <AdminDashboard />
+    </div>
+  </div>
+</BaseLayout>
 
 <style>
   .admin-container {
@@ -129,29 +150,107 @@ const isAuthenticated = true; // Placeholder for authentication check
   }
 </style>
 
-<script>
+<script type="module">
+  import { clientAuth } from '../../utils/auth.js';
+
   // Client-side authentication logic
-  document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', async function() {
+    const loginContainer = document.getElementById('login-container');
+    const adminContainer = document.getElementById('admin-container');
     const loginForm = document.getElementById('login-form');
-    
+    const loginBtn = document.getElementById('login-btn');
+    const loginError = document.getElementById('login-error');
+
+    // Check if user is already authenticated
+    if (clientAuth.checkAuth()) {
+      showAdminPanel();
+    } else {
+      showLoginForm();
+    }
+
+    // Handle login form submission
     if (loginForm) {
-      loginForm.addEventListener('submit', function(e) {
+      loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
-        
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
-        
-        // Simple authentication (replace with actual auth logic)
-        if (username === 'admin' && password === 'nosytlabs2025') {
-          // Set authentication cookie/localStorage
-          localStorage.setItem('admin-auth', 'true');
-          
-          // Redirect to admin dashboard
-          window.location.href = '/admin';
-        } else {
-          alert('Invalid username or password');
+
+        const formData = new FormData(loginForm);
+
+        // Show loading state
+        loginBtn.classList.add('loading');
+        loginBtn.disabled = true;
+        hideError();
+
+        try {
+          const result = await clientAuth.handleLogin(formData);
+
+          if (result.success) {
+            // Success - show admin panel
+            showAdminPanel();
+          } else {
+            // Show error
+            showError(result.error);
+          }
+        } catch (error) {
+          showError('An unexpected error occurred. Please try again.');
+        } finally {
+          // Hide loading state
+          loginBtn.classList.remove('loading');
+          loginBtn.disabled = false;
         }
       });
     }
+
+    // Add logout functionality to admin header
+    document.addEventListener('click', function(e) {
+      if (e.target.id === 'logout-btn' || e.target.closest('#logout-btn')) {
+        e.preventDefault();
+        clientAuth.logout();
+      }
+    });
+
+    function showLoginForm() {
+      if (loginContainer) loginContainer.style.display = 'flex';
+      if (adminContainer) adminContainer.style.display = 'none';
+    }
+
+    function showAdminPanel() {
+      if (loginContainer) loginContainer.style.display = 'none';
+      if (adminContainer) adminContainer.style.display = 'flex';
+
+      // Update user info in header
+      const user = clientAuth.getCurrentUser();
+      if (user) {
+        const userInfo = document.querySelector('.admin-user-info');
+        if (userInfo) {
+          userInfo.textContent = `Welcome, ${user.username}`;
+        }
+      }
+    }
+
+    function showError(message) {
+      if (loginError) {
+        loginError.textContent = message;
+        loginError.style.display = 'block';
+      }
+    }
+
+    function hideError() {
+      if (loginError) {
+        loginError.style.display = 'none';
+      }
+    }
+
+    // Demo credentials auto-fill (for development)
+    const demoCredentials = document.querySelectorAll('.login-footer code');
+    demoCredentials.forEach(code => {
+      code.addEventListener('click', function() {
+        const text = this.textContent;
+        if (text === 'admin' || text === 'nosytlabs') {
+          document.getElementById('username').value = text;
+        } else if (text === 'password') {
+          document.getElementById('password').value = text;
+        }
+      });
+    });
   });
 </script>

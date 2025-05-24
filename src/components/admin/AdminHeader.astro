@@ -9,7 +9,7 @@ const { title } = Astro.props;
 
 <header class="admin-header">
   <h1>{title}</h1>
-  
+
   <div class="header-actions">
     <button id="theme-toggle-admin" class="theme-toggle-btn" aria-label="Toggle dark mode">
       <svg xmlns="http://www.w3.org/2000/svg" class="theme-icon light-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -19,16 +19,16 @@ const { title } = Astro.props;
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
       </svg>
     </button>
-    
+
     <div class="user-menu">
       <button id="user-menu-btn" class="user-menu-btn">
         <img src="/images/admin/avatar.png" alt="Admin User" class="user-avatar" onerror="this.src='/images/admin/avatar-placeholder.png'">
-        <span>Admin</span>
+        <span class="admin-user-info">Admin</span>
         <svg xmlns="http://www.w3.org/2000/svg" class="dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
         </svg>
       </button>
-      
+
       <div id="user-dropdown" class="user-dropdown">
         <a href="/admin/profile" class="dropdown-item">
           <svg xmlns="http://www.w3.org/2000/svg" class="dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,7 +44,7 @@ const { title } = Astro.props;
           <span>Settings</span>
         </a>
         <div class="dropdown-divider"></div>
-        <button id="logout-dropdown-btn" class="dropdown-item logout-item">
+        <button id="logout-btn" class="dropdown-item logout-item">
           <svg xmlns="http://www.w3.org/2000/svg" class="dropdown-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
           </svg>
@@ -214,12 +214,12 @@ const { title } = Astro.props;
     const userDropdown = document.getElementById('user-dropdown');
     const logoutDropdownBtn = document.getElementById('logout-dropdown-btn');
     const themeToggleAdmin = document.getElementById('theme-toggle-admin');
-    
+
     if (userMenuBtn && userDropdown) {
       userMenuBtn.addEventListener('click', function() {
         userDropdown.classList.toggle('active');
       });
-      
+
       // Close dropdown when clicking outside
       document.addEventListener('click', function(e) {
         if (!userMenuBtn.contains(e.target) && !userDropdown.contains(e.target)) {
@@ -227,21 +227,13 @@ const { title } = Astro.props;
         }
       });
     }
-    
-    if (logoutDropdownBtn) {
-      logoutDropdownBtn.addEventListener('click', function() {
-        // Clear authentication
-        localStorage.removeItem('admin-auth');
-        
-        // Redirect to login page
-        window.location.href = '/admin';
-      });
-    }
-    
+
+    // Logout functionality is handled in the main admin page
+
     if (themeToggleAdmin) {
       themeToggleAdmin.addEventListener('click', function() {
         document.documentElement.classList.toggle('dark');
-        
+
         // Save preference
         if (document.documentElement.classList.contains('dark')) {
           localStorage.setItem('theme', 'dark');

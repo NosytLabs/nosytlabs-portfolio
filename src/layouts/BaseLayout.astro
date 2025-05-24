@@ -2,6 +2,7 @@
 // BaseLayout.astro - Modern layout for the website
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SearchModal from '../components/SearchModal.astro';
 import VercelAnalytics from '../components/VercelAnalytics.astro';
 
 export interface Props {
@@ -176,6 +177,9 @@ const pageId = `page-${Math.random().toString(36).substring(2, 9)}`;
 
   <!-- Footer - Only show modern footer on non-NosytOS95 pages -->
   {!isNosytOS95 && <Footer />}
+
+  <!-- Search Modal - Available on all pages -->
+  {!isNosytOS95 && <SearchModal />}
 
   <!-- Back to top button -->
   {!isNosytOS95 && (

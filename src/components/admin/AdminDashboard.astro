@@ -1,5 +1,6 @@
 ---
 // Admin Dashboard Component
+import AdminMessages from './AdminMessages.astro';
 ---
 
 <div class="dashboard-container">
@@ -16,7 +17,7 @@
         <p class="stat-description">Total projects</p>
       </div>
     </div>
-    
+
     <div class="stat-card">
       <div class="stat-icon blog-icon">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -29,7 +30,7 @@
         <p class="stat-description">Published posts</p>
       </div>
     </div>
-    
+
     <div class="stat-card">
       <div class="stat-icon media-icon">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -42,7 +43,7 @@
         <p class="stat-description">Uploaded files</p>
       </div>
     </div>
-    
+
     <div class="stat-card">
       <div class="stat-icon messages-icon">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -56,7 +57,7 @@
       </div>
     </div>
   </div>
-  
+
   <div class="dashboard-sections">
     <div class="dashboard-section">
       <div class="section-header">
@@ -133,7 +134,7 @@
         </table>
       </div>
     </div>
-    
+
     <div class="dashboard-section">
       <div class="section-header">
         <h2>Recent Blog Posts</h2>
@@ -208,6 +209,11 @@
           </tbody>
         </table>
       </div>
+    </div>
+
+    <!-- Messages Section -->
+    <div class="dashboard-section">
+      <AdminMessages />
     </div>
   </div>
 </div>

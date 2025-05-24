@@ -1,0 +1,970 @@
+---
+/**
+ * Search Modal Component
+ * Provides comprehensive search functionality across the website
+ */
+
+interface Props {
+  placeholder?: string;
+  showCategories?: boolean;
+  maxResults?: number;
+}
+
+const {
+  placeholder = "Search NosytLabs...",
+  showCategories = true,
+  maxResults = 10
+} = Astro.props;
+---
+
+<!-- Search Modal Trigger -->
+<button id="search-trigger" class="search-trigger" aria-label="Open search">
+  <svg xmlns="http://www.w3.org/2000/svg" class="search-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+  </svg>
+  <span class="search-text">Search</span>
+  <kbd class="search-kbd">⌘K</kbd>
+</button>
+
+<!-- Search Modal -->
+<div id="search-modal" class="search-modal" role="dialog" aria-modal="true" aria-labelledby="search-title">
+  <div class="search-backdrop"></div>
+  
+  <div class="search-container">
+    <div class="search-header">
+      <div class="search-input-container">
+        <svg xmlns="http://www.w3.org/2000/svg" class="search-input-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+        </svg>
+        <input 
+          type="text" 
+          id="search-input" 
+          class="search-input" 
+          placeholder={placeholder}
+          autocomplete="off"
+          spellcheck="false"
+          aria-label="Search query"
+        >
+        <button id="search-clear" class="search-clear" aria-label="Clear search">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      
+      <button id="search-close" class="search-close" aria-label="Close search">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+
+    {showCategories && (
+      <div id="search-filters" class="search-filters">
+        <button class="filter-btn active" data-category="all">All</button>
+        <button class="filter-btn" data-category="page">Pages</button>
+        <button class="filter-btn" data-category="blog">Blog</button>
+        <button class="filter-btn" data-category="project">Projects</button>
+        <button class="filter-btn" data-category="service">Services</button>
+      </div>
+    )}
+
+    <div class="search-content">
+      <!-- Loading State -->
+      <div id="search-loading" class="search-loading" style="display: none;">
+        <div class="loading-spinner"></div>
+        <p>Searching...</p>
+      </div>
+
+      <!-- Empty State -->
+      <div id="search-empty" class="search-empty">
+        <div class="empty-icon">🔍</div>
+        <h3>Search NosytLabs</h3>
+        <p>Find pages, blog posts, projects, and services</p>
+        
+        <div class="popular-searches">
+          <h4>Popular searches:</h4>
+          <div class="popular-tags">
+            <button class="popular-tag" data-query="web development">Web Development</button>
+            <button class="popular-tag" data-query="3d printing">3D Printing</button>
+            <button class="popular-tag" data-query="cursor ai">Cursor AI</button>
+            <button class="popular-tag" data-query="nosytos95">NosytOS95</button>
+            <button class="popular-tag" data-query="passive income">Passive Income</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- No Results State -->
+      <div id="search-no-results" class="search-no-results" style="display: none;">
+        <div class="no-results-icon">😔</div>
+        <h3>No results found</h3>
+        <p id="no-results-text">Try adjusting your search terms or browse our popular content.</p>
+        
+        <div class="search-suggestions">
+          <h4>Suggestions:</h4>
+          <ul id="search-suggestions-list"></ul>
+        </div>
+      </div>
+
+      <!-- Results -->
+      <div id="search-results" class="search-results" style="display: none;">
+        <div id="search-results-header" class="results-header">
+          <span id="results-count">0 results</span>
+          <span id="results-query"></span>
+        </div>
+        
+        <div id="search-results-content" class="results-content"></div>
+      </div>
+    </div>
+
+    <div class="search-footer">
+      <div class="search-shortcuts">
+        <kbd>↑↓</kbd> Navigate
+        <kbd>↵</kbd> Select
+        <kbd>Esc</kbd> Close
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Search Trigger */
+  .search-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    font-size: 0.875rem;
+  }
+
+  .search-trigger:hover {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.3);
+  }
+
+  .search-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .search-text {
+    display: none;
+  }
+
+  .search-kbd {
+    display: none;
+    padding: 0.125rem 0.375rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-family: monospace;
+  }
+
+  @media (min-width: 768px) {
+    .search-text {
+      display: block;
+    }
+    
+    .search-kbd {
+      display: block;
+    }
+  }
+
+  /* Search Modal */
+  .search-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: none;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+  }
+
+  .search-modal.active {
+    display: flex;
+  }
+
+  .search-backdrop {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+  }
+
+  .search-container {
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    margin-top: 2rem;
+    animation: searchModalIn 0.3s ease-out;
+  }
+
+  :global(.dark) .search-container {
+    background: #1f2937;
+    border: 1px solid #374151;
+  }
+
+  @keyframes searchModalIn {
+    from {
+      opacity: 0;
+      transform: translateY(-20px) scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  /* Search Header */
+  .search-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+  }
+
+  :global(.dark) .search-header {
+    border-bottom-color: #374151;
+  }
+
+  .search-input-container {
+    flex: 1;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .search-input-icon {
+    position: absolute;
+    left: 0.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    color: #6b7280;
+    pointer-events: none;
+  }
+
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+    border: none;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    outline: none;
+  }
+
+  :global(.dark) .search-input {
+    background: #374151;
+    color: white;
+  }
+
+  .search-input:focus {
+    background: white;
+    box-shadow: 0 0 0 2px #4f46e5;
+  }
+
+  :global(.dark) .search-input:focus {
+    background: #4b5563;
+  }
+
+  .search-clear {
+    position: absolute;
+    right: 0.5rem;
+    padding: 0.25rem;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 0.25rem;
+    display: none;
+  }
+
+  .search-clear.visible {
+    display: block;
+  }
+
+  .search-clear:hover {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  :global(.dark) .search-clear:hover {
+    background: #4b5563;
+    color: #d1d5db;
+  }
+
+  .search-clear svg {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  .search-close {
+    margin-left: 0.75rem;
+    padding: 0.5rem;
+    background: none;
+    border: none;
+    color: #6b7280;
+    cursor: pointer;
+    border-radius: 0.375rem;
+  }
+
+  .search-close:hover {
+    background: #f3f4f6;
+    color: #374151;
+  }
+
+  :global(.dark) .search-close:hover {
+    background: #4b5563;
+    color: #d1d5db;
+  }
+
+  .search-close svg {
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+
+  /* Search Filters */
+  .search-filters {
+    display: flex;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    overflow-x: auto;
+  }
+
+  :global(.dark) .search-filters {
+    border-bottom-color: #374151;
+  }
+
+  .filter-btn {
+    padding: 0.375rem 0.75rem;
+    background: none;
+    border: 1px solid #d1d5db;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+  }
+
+  :global(.dark) .filter-btn {
+    border-color: #4b5563;
+    color: #9ca3af;
+  }
+
+  .filter-btn:hover,
+  .filter-btn.active {
+    background: #4f46e5;
+    border-color: #4f46e5;
+    color: white;
+  }
+
+  /* Search Content */
+  .search-content {
+    min-height: 200px;
+    max-height: 400px;
+    overflow-y: auto;
+  }
+
+  .search-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+  }
+
+  .loading-spinner {
+    width: 2rem;
+    height: 2rem;
+    border: 2px solid #e5e7eb;
+    border-top: 2px solid #4f46e5;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 1rem;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  .search-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+  }
+
+  .empty-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-empty h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+  }
+
+  :global(.dark) .search-empty h3 {
+    color: #d1d5db;
+  }
+
+  .popular-searches {
+    margin-top: 2rem;
+  }
+
+  .popular-searches h4 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: #374151;
+  }
+
+  :global(.dark) .popular-searches h4 {
+    color: #d1d5db;
+  }
+
+  .popular-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+  }
+
+  .popular-tag {
+    padding: 0.375rem 0.75rem;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .popular-tag {
+    background: #374151;
+    color: #9ca3af;
+  }
+
+  .popular-tag:hover {
+    background: #4f46e5;
+    color: white;
+  }
+
+  .search-no-results {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: #6b7280;
+  }
+
+  .no-results-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .search-no-results h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #374151;
+  }
+
+  :global(.dark) .search-no-results h3 {
+    color: #d1d5db;
+  }
+
+  .search-suggestions {
+    margin-top: 1.5rem;
+    text-align: left;
+    max-width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .search-suggestions h4 {
+    font-size: 0.875rem;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+    color: #374151;
+  }
+
+  :global(.dark) .search-suggestions h4 {
+    color: #d1d5db;
+  }
+
+  .search-suggestions ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .search-suggestions li {
+    padding: 0.25rem 0;
+    font-size: 0.875rem;
+  }
+
+  /* Search Results */
+  .search-results {
+    padding: 1rem;
+  }
+
+  .results-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    font-size: 0.875rem;
+    color: #6b7280;
+  }
+
+  :global(.dark) .results-header {
+    border-bottom-color: #374151;
+  }
+
+  .results-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .result-category {
+    margin-bottom: 1.5rem;
+  }
+
+  .category-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: #374151;
+  }
+
+  :global(.dark) .category-header {
+    color: #d1d5db;
+  }
+
+  .category-icon {
+    font-size: 1rem;
+  }
+
+  .result-item {
+    display: block;
+    padding: 0.75rem;
+    background: #f9fafb;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+  }
+
+  :global(.dark) .result-item {
+    background: #374151;
+  }
+
+  .result-item:hover,
+  .result-item.selected {
+    background: white;
+    border-color: #4f46e5;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.1);
+    transform: translateY(-1px);
+  }
+
+  :global(.dark) .result-item:hover,
+  :global(.dark) .result-item.selected {
+    background: #4b5563;
+  }
+
+  .result-title {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+    color: #374151;
+  }
+
+  :global(.dark) .result-title {
+    color: #f3f4f6;
+  }
+
+  .result-description {
+    font-size: 0.875rem;
+    color: #6b7280;
+    line-height: 1.4;
+  }
+
+  .result-url {
+    font-size: 0.75rem;
+    color: #4f46e5;
+    margin-top: 0.25rem;
+  }
+
+  .result-item mark {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 0.125rem 0.25rem;
+    border-radius: 0.25rem;
+  }
+
+  :global(.dark) .result-item mark {
+    background: #451a03;
+    color: #fbbf24;
+  }
+
+  /* Search Footer */
+  .search-footer {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid #e5e7eb;
+    background: #f9fafb;
+  }
+
+  :global(.dark) .search-footer {
+    border-top-color: #374151;
+    background: #374151;
+  }
+
+  .search-shortcuts {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.75rem;
+    color: #6b7280;
+    align-items: center;
+  }
+
+  .search-shortcuts kbd {
+    padding: 0.125rem 0.375rem;
+    background: white;
+    border: 1px solid #d1d5db;
+    border-radius: 0.25rem;
+    font-family: monospace;
+    font-size: 0.75rem;
+  }
+
+  :global(.dark) .search-shortcuts kbd {
+    background: #4b5563;
+    border-color: #6b7280;
+    color: #d1d5db;
+  }
+
+  /* Responsive */
+  @media (max-width: 640px) {
+    .search-modal {
+      padding: 1rem;
+    }
+    
+    .search-container {
+      margin-top: 1rem;
+    }
+    
+    .search-filters {
+      padding: 0.5rem 1rem;
+    }
+    
+    .filter-btn {
+      font-size: 0.75rem;
+      padding: 0.25rem 0.5rem;
+    }
+  }
+</style>
+
+<script type="module">
+  import searchService, { searchUtils } from '../utils/searchService.js';
+
+  document.addEventListener('DOMContentLoaded', async () => {
+    // Initialize search service
+    await searchService.initialize();
+
+    // DOM elements
+    const searchTrigger = document.getElementById('search-trigger');
+    const searchModal = document.getElementById('search-modal');
+    const searchInput = document.getElementById('search-input');
+    const searchClear = document.getElementById('search-clear');
+    const searchClose = document.getElementById('search-close');
+    const searchBackdrop = document.querySelector('.search-backdrop');
+    const searchFilters = document.getElementById('search-filters');
+    const searchLoading = document.getElementById('search-loading');
+    const searchEmpty = document.getElementById('search-empty');
+    const searchNoResults = document.getElementById('search-no-results');
+    const searchResults = document.getElementById('search-results');
+    const searchResultsContent = document.getElementById('search-results-content');
+    const resultsCount = document.getElementById('results-count');
+    const resultsQuery = document.getElementById('results-query');
+
+    // State
+    let currentQuery = '';
+    let currentCategory = 'all';
+    let selectedIndex = -1;
+    let searchResults = [];
+
+    // Debounced search function
+    const debouncedSearch = searchUtils.debounce(performSearch, 300);
+
+    // Event listeners
+    searchTrigger?.addEventListener('click', openModal);
+    searchClose?.addEventListener('click', closeModal);
+    searchBackdrop?.addEventListener('click', closeModal);
+    searchClear?.addEventListener('click', clearSearch);
+    searchInput?.addEventListener('input', handleSearchInput);
+    searchInput?.addEventListener('keydown', handleKeyDown);
+
+    // Filter buttons
+    searchFilters?.addEventListener('click', (e) => {
+      if (e.target.classList.contains('filter-btn')) {
+        handleFilterChange(e.target);
+      }
+    });
+
+    // Popular tags
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('popular-tag')) {
+        const query = e.target.dataset.query;
+        if (query) {
+          searchInput.value = query;
+          handleSearchInput();
+        }
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Cmd/Ctrl + K to open search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        openModal();
+      }
+      
+      // Escape to close
+      if (e.key === 'Escape' && searchModal.classList.contains('active')) {
+        closeModal();
+      }
+    });
+
+    // Functions
+    function openModal() {
+      searchModal.classList.add('active');
+      searchInput.focus();
+      document.body.style.overflow = 'hidden';
+      showEmptyState();
+    }
+
+    function closeModal() {
+      searchModal.classList.remove('active');
+      document.body.style.overflow = '';
+      clearSearch();
+    }
+
+    function clearSearch() {
+      searchInput.value = '';
+      searchClear.classList.remove('visible');
+      currentQuery = '';
+      selectedIndex = -1;
+      showEmptyState();
+    }
+
+    function handleSearchInput() {
+      const query = searchInput.value.trim();
+      
+      if (query.length > 0) {
+        searchClear.classList.add('visible');
+      } else {
+        searchClear.classList.remove('visible');
+      }
+
+      if (query !== currentQuery) {
+        currentQuery = query;
+        selectedIndex = -1;
+        
+        if (query.length >= 2) {
+          showLoading();
+          debouncedSearch(query);
+        } else if (query.length === 0) {
+          showEmptyState();
+        }
+      }
+    }
+
+    function handleFilterChange(button) {
+      // Update active filter
+      searchFilters.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      button.classList.add('active');
+      
+      currentCategory = button.dataset.category;
+      
+      // Re-search with new filter
+      if (currentQuery.length >= 2) {
+        performSearch(currentQuery);
+      }
+    }
+
+    function handleKeyDown(e) {
+      if (!searchResults.length) return;
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          selectedIndex = Math.min(selectedIndex + 1, searchResults.length - 1);
+          updateSelection();
+          break;
+          
+        case 'ArrowUp':
+          e.preventDefault();
+          selectedIndex = Math.max(selectedIndex - 1, -1);
+          updateSelection();
+          break;
+          
+        case 'Enter':
+          e.preventDefault();
+          if (selectedIndex >= 0 && searchResults[selectedIndex]) {
+            navigateToResult(searchResults[selectedIndex]);
+          }
+          break;
+      }
+    }
+
+    async function performSearch(query) {
+      try {
+        const options = currentCategory !== 'all' ? { category: currentCategory } : {};
+        const results = await searchService.search(query, options);
+        
+        searchResults = [];
+        Object.values(results.categories).forEach(categoryResults => {
+          searchResults.push(...categoryResults.map(r => r.document));
+        });
+
+        if (searchResults.length > 0) {
+          showResults(results);
+        } else {
+          showNoResults(query, results.suggestions);
+        }
+      } catch (error) {
+        console.error('Search error:', error);
+        showNoResults(query, []);
+      }
+    }
+
+    function showLoading() {
+      hideAllStates();
+      searchLoading.style.display = 'flex';
+    }
+
+    function showEmptyState() {
+      hideAllStates();
+      searchEmpty.style.display = 'block';
+    }
+
+    function showNoResults(query, suggestions) {
+      hideAllStates();
+      document.getElementById('no-results-text').textContent = 
+        `No results found for "${query}". Try adjusting your search terms.`;
+      
+      const suggestionsList = document.getElementById('search-suggestions-list');
+      suggestionsList.innerHTML = '';
+      
+      if (suggestions.length > 0) {
+        suggestions.forEach(suggestion => {
+          const li = document.createElement('li');
+          li.innerHTML = `<button class="popular-tag" data-query="${suggestion}">${suggestion}</button>`;
+          suggestionsList.appendChild(li);
+        });
+      } else {
+        suggestionsList.innerHTML = '<li>Try searching for "web development", "3d printing", or "nosytos95"</li>';
+      }
+      
+      searchNoResults.style.display = 'block';
+    }
+
+    function showResults(results) {
+      hideAllStates();
+      
+      resultsCount.textContent = `${results.total} result${results.total !== 1 ? 's' : ''}`;
+      resultsQuery.textContent = `for "${results.query}"`;
+      
+      const formattedResults = searchUtils.formatResults(results);
+      searchResultsContent.innerHTML = '';
+      
+      formattedResults.forEach(category => {
+        const categoryDiv = document.createElement('div');
+        categoryDiv.className = 'result-category';
+        
+        categoryDiv.innerHTML = `
+          <div class="category-header">
+            <span class="category-icon">${searchUtils.getCategoryIcon(category.category.toLowerCase())}</span>
+            <span>${category.category}</span>
+          </div>
+        `;
+        
+        category.items.forEach(item => {
+          const resultDiv = document.createElement('a');
+          resultDiv.className = 'result-item';
+          resultDiv.href = item.url;
+          resultDiv.addEventListener('click', () => navigateToResult(item));
+          
+          const highlightedTitle = searchUtils.highlightSearchTerms(item.title, results.query);
+          const highlightedDescription = searchUtils.highlightSearchTerms(item.description, results.query);
+          
+          resultDiv.innerHTML = `
+            <div class="result-title">${highlightedTitle}</div>
+            <div class="result-description">${highlightedDescription}</div>
+            <div class="result-url">${item.url}</div>
+          `;
+          
+          categoryDiv.appendChild(resultDiv);
+        });
+        
+        searchResultsContent.appendChild(categoryDiv);
+      });
+      
+      searchResults.style.display = 'block';
+      selectedIndex = -1;
+    }
+
+    function hideAllStates() {
+      searchLoading.style.display = 'none';
+      searchEmpty.style.display = 'none';
+      searchNoResults.style.display = 'none';
+      searchResults.style.display = 'none';
+    }
+
+    function updateSelection() {
+      const resultItems = searchResultsContent.querySelectorAll('.result-item');
+      resultItems.forEach((item, index) => {
+        item.classList.toggle('selected', index === selectedIndex);
+      });
+      
+      if (selectedIndex >= 0 && resultItems[selectedIndex]) {
+        resultItems[selectedIndex].scrollIntoView({ block: 'nearest' });
+      }
+    }
+
+    function navigateToResult(result) {
+      closeModal();
+      window.location.href = result.url;
+    }
+  });
+</script>
